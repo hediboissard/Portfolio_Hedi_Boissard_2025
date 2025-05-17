@@ -1,0 +1,98 @@
+<template>
+  <section id="projects" class=" py-10 md:pt-50 px-2 md:px-0 max-w-4xl mx-auto">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-12 text-center">Projets</h2>
+    <div class="flex items-center gap-2 md:gap-4">
+
+      <button @click="prevSlide" 
+              class="border-1 md:border-2 border-white/40 p-1 md:p-4 rounded-full cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <div class="overflow-hidden">
+        <div class="flex transition-transform duration-500 ease-in-out"
+             :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+          <div v-for="(project, index) in projects" 
+               :key="index" 
+               class="w-full flex-shrink-0 px-1 md:px-4">
+            <div class="bg-[#1E293B] rounded-2xl md:rounded-4xl overflow-hidden h-full p-6 md:p-8">
+              <h3 class="text-base md:text-xl font-semibold mb-1 md:mb-2">{{ project.title }}</h3>
+              <p class="text-white/70 mb-2 md:mb-4 text-xs md:text-base line-clamp-3 md:line-clamp-none">{{ project.description }}</p>
+              <div class="flex flex-wrap gap-1 md:gap-2 mb-2 md:mb-4">
+                <span v-for="tech in project.technologies" 
+                      :key="tech"
+                      class="bg-[#007198] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">
+                  {{ tech }}
+                </span>
+              </div>
+              <a :href="project.github" 
+                 target="_blank"
+                 class="flex items-center gap-1 md:gap-2 text-white/70 hover:text-white text-xs md:text-base">
+                <img src="../assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5">
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button @click="nextSlide" 
+              class="border-1 md:border-2 border-white/40 p-1 md:p-4 rounded-full cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex justify-center gap-2 md:gap-3 mt-4 md:mt-6">
+      <button v-for="(_, index) in projects" 
+              :key="index"
+              @click="currentIndex = index"
+              class="w-2 h-2 md:w-4 md:h-4 rounded-full transition-all duration-300 hover:scale-125"
+              :class="index === currentIndex ? 'bg-[#007198] scale-110' : 'bg-gray-400'">
+      </button>
+    </div>
+  </section>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const currentIndex = ref(0)
+
+const projects = [
+  {
+    title: "Moodify",
+    description: "Application web réalisée en équipe qui recommande des musiques selon l'humeur de l'utilisateur. Développée avec une architecture moderne et des APIs externes.",
+    technologies: ["Vue.js", "Node.js", "Express", "API Spotify"],
+    github: "https://github.com/hediboissard/Moodify"
+  },
+  {
+    title: "E-commerce Fossiles",
+    description: "Site e-commerce de vente de fossiles en ligne. Projet réalisé en Vue.js avec une attention particulière portée sur l'expérience utilisateur.",
+    technologies: ["Vue.js", "JavaScript", "Tailwind CSS"],
+    github: "https://github.com/hediboissard/Projet_Final_Vue_Js"
+  },
+  {
+    title: "Projet DevOps Cars",
+    description: "Premier projet DevOps réalisé à Efrei Paris, mettant en pratique les concepts fondamentaux de l'intégration continue.",
+    technologies: ["DevOps", "CI/CD", "Git"],
+    github: "https://github.com/hediboissard/Projet_Cars_DevOps"
+  },
+  {
+    title: "Comptinou",
+    description: "Application Android permettant de créer des histoires personnalisées pour les enfants. Développée en équipe avec Java et Kotlin.",
+    technologies: ["Android", "Java", "Kotlin", "Android Studio"],
+    github: "https://github.com/hediboissard/Comptinou"
+  }
+]
+
+const nextSlide = () => {
+  currentIndex.value = (currentIndex.value + 1) % projects.length
+}
+
+const prevSlide = () => {
+  currentIndex.value = currentIndex.value === 0 ? projects.length - 1 : currentIndex.value - 1
+}
+</script>
