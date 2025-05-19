@@ -4,7 +4,7 @@
     <div class="grid gap-6">
       <div v-for="(exp, index) in experiences" 
            :key="index" 
-           class="bg-[#1E293B] p-6 rounded-lg hover:bg-[#2E3B4B] transition-colors">
+           class="bg-[#1E293B] p-6 rounded-lg">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
           <div class="space-y-2">
             <h3 class="text-xl font-semibold text-white">{{ exp.title }}</h3>

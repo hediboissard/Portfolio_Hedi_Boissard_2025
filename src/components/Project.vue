@@ -28,9 +28,10 @@
               </div>
               <a :href="project.github" 
                  target="_blank"
-                 class="flex items-center gap-1 md:gap-2 text-white/70 hover:text-white text-xs md:text-base">
+                 class="flex items-center gap-1 md:gap-2 text-white/70 hover:text-white text-xs md:text-base bg-black/20 hover:bg-[#007198] transition-colors rounded-full p-2 justify-center">
                 <img src="../assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5">
                 GitHub
+                <img src="../assets/external_link.svg" class="size-4 invert " alt="">
               </a>
             </div>
           </div>
@@ -71,7 +72,7 @@ const projects = [
   {
     title: "E-commerce Fossiles",
     description: "Site e-commerce de vente de fossiles en ligne. Projet réalisé en Vue.js avec une attention particulière portée sur l'expérience utilisateur.",
-    technologies: ["Vue.js", "JavaScript", "Tailwind CSS"],
+    technologies: ["Vue.js", "Tailwind CSS"],
     github: "https://github.com/hediboissard/Projet_Final_Vue_Js"
   },
   {

@@ -1,10 +1,10 @@
 <template>
   <section id="about" class="min-h-screen py-20 max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-center">À Propos de Moi</h2>
-    <div class="flex flex-col md:flex-row gap-8">
+    <h2 class="text-3xl font-bold mb-12 text-center">À Propos de Moi</h2>
+    <div class="flex flex-col md:flex-row gap-8 mx-6">
       <div class="md:w-2/5">
         <div class="bg-[#1E293B] rounded-xl overflow-hidden">
-          <img src="../assets/pp_Hedi.jpeg" alt="Photo de profil" class="w-full h-auto">
+          <img src="../assets/about_hedi.png" alt="Photo de profil" class="w-full h-auto">
         </div>
       </div>
       <div class="md:w-3/5">
