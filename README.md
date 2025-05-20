@@ -1,33 +1,71 @@
-# Portfolio_Hedi
+# Portfolio - Hédi Boissard
 
-This template should help get you started developing with Vue 3 in Vite.
+Portfolio personnel présentant mes projets et compétences en développement web. Développé avec Vue et Tailwind CSS.
 
-## Recommended IDE Setup
+## Technologies utilisées
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue.js 
+- TypeScript
+- Tailwind CSS
+- Vite
 
-## Type Support for `.vue` Imports in TS
+## Installation
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+1. Clonez le repository
+```bash
+git clone https://github.com/hediboissard/portfolio.git
+cd portfolio
+```
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+2. Installez les dépendances
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+3. Lancez le serveur de développement
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## 📁 Structure du projet
 
-```sh
-npm run build
 ```
+portfolio/
+├── public/          # Ressources statiques
+│   ├── assets/      # Images et ressources
+│       ├── skills/
+├── src/
+│   ├── components/  # Composants Vue
+│   └── App.vue      # Composant racine
+├── index.html
+├── main.css
+└── README.md
+```
+
+## 📱 Fonctionnalités
+
+- Design responsive
+- Animations fluides
+- Présentation des projets
+- Section compétences interactive
+- Formulaire de contact
+- Navigation smooth scroll
+
+## 🔧 Commandes disponibles
+
+```bash
+# Développement
+npm run dev
+
+# Build production
+npm run build
+
+# Vérification des types
+npm run type-check
+```
+
+## 📝 Contact
+
+- GitHub: [@hediboissard](https://github.com/hediboissard)
+- LinkedIn: [Hédi Boissard](https://linkedin.com/in/hédi-boissard-a994ab25b)
+- Email: hboissard23@gmail.com
