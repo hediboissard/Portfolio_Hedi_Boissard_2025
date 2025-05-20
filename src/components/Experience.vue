@@ -1,5 +1,5 @@
 <template>
-  <section id="experience" class="my-20 max-w-4xl mx-auto">
+  <section id="experience" class="my-20 max-w-4xl mx-6">
     <h2 class="text-3xl font-bold mb-8 text-center">Expériences</h2>
     <div class="grid gap-6">
       <div v-for="(exp, index) in experiences" 

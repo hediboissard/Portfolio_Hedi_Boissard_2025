@@ -26,7 +26,7 @@
     </nav>
     
     <nav class="hidden fixed md:flex w-full justify-center transition-all duration-300" 
-         :class="{'shadow-lg bg-[#051C24]/95 backdrop-blur-sm': scrolled}">
+         :class="{'shadow-lg bg-[#0e0c12]/95 backdrop-blur-sm': scrolled}">
       <ul class="flex justify-center items-center p-4 px-6 rounded-xl gap-5 mx-6 my-4 ">
         <li v-for="item in menuItems" :key="item.id">
           <a :href="item.href" 
