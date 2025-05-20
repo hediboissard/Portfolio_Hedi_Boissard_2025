@@ -82,7 +82,7 @@ const words = [
 }
 
 .animate-slideUp {
-  animation: slideDown 0.5s ease-out forwards;
+  animation: slideDown 0.2s ease-out forwards;
   opacity: 0;
 }
 </style>

@@ -12,7 +12,7 @@
       </div>
 
       <div v-if="isOpen" 
-           class="fixed inset-0 bg-[#051C24]/95 backdrop-blur-sm z-40 pt-20">
+           class="fixed inset-0 bg-[#0e0c12]/95 backdrop-blur-sm z-40 pt-20">
         <ul class="flex flex-col items-center gap-8 text-lg">
           <li v-for="item in menuItems" :key="item.id">
             <a :href="item.href" 

@@ -8,7 +8,7 @@
              :key="skill.name"
              @click="openPopup(skill)"
              class="flex flex-col items-center gap-2 p-6 bg-[#1E293B] rounded-2xl hover:bg-[#2E3B4B] transition-all duration-300 cursor-pointer">
-          <img :src="`/src/assets/skills/${skill.logo}`" 
+          <img :src="`../src/assets/skills/${skill.logo}`" 
                :alt="skill.name"
                class="size-10 md:w-16 md:h-16">
           <span class="text-sm md:text-base text-white/70 text-center hidden md:flex">{{ skill.name }}</span>
@@ -23,7 +23,7 @@
            @click.stop>
         <div class="flex mb-4 justify-between">
           <div class="flex items-center gap-4">
-            <img :src="`/src/assets/skills/${selectedSkill.logo}`" 
+            <img :src="`../src/assets/skills/${selectedSkill.logo}`" 
                  :alt="selectedSkill.name"
                  class="w-16 h-16">
             <h3 class="text-xl font-semibold">{{ selectedSkill.name }}</h3>
@@ -41,7 +41,7 @@
              target="_blank"
              class="text-[#007198] hover:text-[#005A7A] transition-colors flex items-center gap-2">
             Documentation
-            <img src="/src/assets/external_link.svg" class="size-4 invert" alt="">
+            <img src="@/assets/external_link.svg" class="size-4 invert" alt="">
           </a>
         </div>
       </div>
