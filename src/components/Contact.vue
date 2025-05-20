@@ -59,19 +59,19 @@ const contactLinks = [
   {
     name: 'Mail',
     url: 'mailto:hboissard23@gmail.com',
-    img_src: '../src/assets/Mail.svg',
+    img_src: '/assets/Mail.svg',
     external: false
   },
   {
     name: 'LinkedIn',
     url: 'https://linkedin.com/in/hédi-boissard-a994ab25b',
-    img_src: '../src/assets/Linkedin.svg',
+    img_src: '/assets/Linkedin.svg',
     external: true
   },
   {
     name: 'GitHub',
     url: 'https://github.com/hediboissard',
-    img_src: '../src/assets/GitHub.svg',
+    img_src: '/assets/GitHub.svg',
     external: true
   }
 ]

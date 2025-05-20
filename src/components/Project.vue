@@ -29,9 +29,9 @@
               <a :href="project.github" 
                  target="_blank"
                  class="flex items-center gap-1 md:gap-2 text-white/70 hover:text-white text-xs md:text-base bg-black/20 hover:bg-[#007198] transition-colors rounded-full p-2 justify-center">
-                <img src="../assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5">
+                <img src="/assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5">
                 GitHub
-                <img src="../assets/external_link.svg" class="size-4 invert " alt="">
+                <img src="/assets/external_link.svg" class="size-4 invert " alt="">
               </a>
             </div>
           </div>

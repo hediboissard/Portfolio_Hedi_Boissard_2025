@@ -10,7 +10,7 @@
             <h3 class="text-xl font-semibold text-white">{{ exp.title }}</h3>
             <a class="text-[#007198] flex items-center gap-2" target="_blank"
               :href="exp.website">{{ exp.company }}
-            <img class="size-3 md:size-4 invert opacity-70" src="/src/assets/external_link.svg" alt=""></a>
+            <img class="size-3 md:size-4 invert opacity-70" src="/assets/external_link.svg" alt=""></a>
           </div>
           <span class="text-white/50">{{ exp.period }}</span>
         </div>

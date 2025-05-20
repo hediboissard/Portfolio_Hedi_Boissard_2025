@@ -4,7 +4,7 @@
     <div class="flex flex-col md:flex-row gap-8 mx-6">
       <div class="md:w-2/5">
         <div class="bg-[#1E293B] rounded-xl overflow-hidden">
-          <img src="../assets/about_hedi.png" alt="Photo de profil" class="w-full h-auto">
+          <img src="/assets/about_hedi.png" alt="Photo de profil" class="w-full h-auto">
         </div>
       </div>
       <div class="md:w-3/5">
