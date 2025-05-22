@@ -7,44 +7,44 @@
         <a v-for="link in contactLinks" 
            :key="link.name"
            :href="link.url"
-           class="flex flex-col md:flex-row items-center gap-3 text-white opacity-75 hover:opacity-100 transition-colors">
-            <img :src="link.img_src" :alt="link.name" class="size-10 opacity-75">
+           class="flex flex-col md:flex-row items-center gap-3 opacity-75 hover:opacity-100 mb-5">
+            <img :src="link.img_src" :alt="link.name" class="size-10 opacity-75 invert">
           {{ link.name }}
         </a>
       </div>
-      <div class="bg-[#1E293B] p-6 md:p-8 rounded-xl">
+      <div class="bg-accent p-6 md:p-8 rounded-xl">
         <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="name" class="block text-sm text-white/70 mb-1">Nom</label>
+              <label for="name" class="block text-sm opacity-70 mb-1">Nom</label>
               <input type="text" 
                      id="name" 
                      v-model="form.name"
                      placeholder="Votre nom"
-                     class="w-full bg-white/70 p-2 rounded-lg text-black border  border-white/10 focus:border-[#007198] outline-none"
+                     class="w-full bg-primary p-2 rounded-lg text-black border placeholder:text-white  border-white/10 focus:border-secondary outline-none"
                      required>
             </div>
             <div>
-              <label for="email" class="block text-sm text-white/70 mb-1">Email</label>
+              <label for="email" class="block text-sm opacity-70 mb-1">Email</label>
               <input type="email" 
                      id="email" 
                      v-model="form.email"
                      placeholder="votre@email.com"
-                     class="w-full bg-white/70 p-2 rounded-lg text-black border  border-white/10 focus:border-[#007198] outline-none"
+                     class="w-full bg-primary p-2 rounded-lg text-black border placeholder:text-white  border-white/10 focus:border-secondary outline-none"
                      required>
             </div>
           </div>
           <div>
-            <label for="message" class="block text-sm text-white/70 mb-1">Message</label>
+            <label for="message" class="block text-sm opacity-70 mb-1">Message</label>
             <textarea id="message" 
                       v-model="form.message"
                       placeholder="Votre message..."
                       rows="5"
-                      class="w-full bg-white/70 p-2 rounded-lg text-black border  border-white/10 focus:border-[#007198] outline-none resize-none"
+                      class="w-full bg-primary p-2 rounded-lg text-black border placeholder:text-white  border-white/10 focus:border-secondary outline-none"
                       required></textarea>
           </div>
           <button type="submit" 
-                  class="bg-[#007198] text-white py-4 px-6 rounded-lg hover:bg-[#005A7A] transition-colors w-full">
+                  class="bg-secondary text-white py-4 px-6 rounded-lg hover:bg-[#005A7A] transition-colors w-full">
             Envoyer
           </button>
         </form>

@@ -7,18 +7,18 @@
         <button v-for="skill in skills" 
              :key="skill.name"
              @click="openPopup(skill)"
-             class="flex flex-col items-center gap-2 p-6 bg-[#1E293B] rounded-2xl hover:bg-[#2E3B4B] transition-all duration-300 cursor-pointer">
+             class="group flex flex-col items-center gap-2 p-6 bg-accent rounded-2xl  transition-all duration-300 cursor-pointer">
           <img :src="`/assets/skills/${skill.logo}`" 
                :alt="skill.name"
                class="size-10 md:w-16 md:h-16">
-          <span class="text-sm md:text-base text-white/70 text-center hidden md:flex">{{ skill.name }}</span>
+          <span class="text-xs md:text-base opacity-60 group-hover:opacity-100 text-center flex">{{ skill.name }}</span>
         </button>
       </div>
     </div>
     <div v-if="selectedSkill" 
          class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
          @click="closePopup">
-      <div class="bg-[#1E293B] p-6 rounded-xl max-w-md w-full transform transition-all duration-300"
+      <div class="bg-accent p-6 rounded-xl max-w-md w-full transform transition-all duration-300"
            :class="{ 'scale-100 opacity-100': isOpen, 'scale-95 opacity-0': !isOpen }"
            @click.stop>
         <div class="flex mb-4 justify-between">
@@ -30,18 +30,18 @@
           </div>
           <div>
             <button @click="closePopup"
-                    class="text-white/70 hover:text-white hover:bg-red-500 p-2 rounded-lg transition-colors cursor-pointer">
+                    class="hover:text-white hover:bg-red-500/100 p-2 rounded-lg transition-colors cursor-pointer">
               Fermer
             </button>
           </div>
         </div>
-        <p class="text-white/70 mb-4">{{ selectedSkill.description }}</p>
+        <p class="opacity-70 mb-4">{{ selectedSkill.description }}</p>
         <div class="flex justify-between items-center">
           <a :href="selectedSkill.website" 
              target="_blank"
-             class="text-[#007198] hover:text-[#005A7A] transition-colors flex items-center gap-2">
+             class="text-secondary flex items-center gap-2">
             Documentation
-            <img src="/assets/external_link.svg" class="size-4 invert" alt="">
+            <img src="/assets/external_link.svg" class="size-4" alt="">
           </a>
         </div>
       </div>

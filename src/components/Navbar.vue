@@ -2,7 +2,7 @@
   <header class="fixed w-full top-0 left-0 right-0 z-50">
     <nav class="p-6 md:hidden">
       <div class="flex items-center justify-end">
-        <button @click="toggleMenu" class="text-white focus:outline-none cursor-pointer z-50">
+        <button @click="toggleMenu" class="text-black focus:outline-none cursor-pointer z-50">
           <svg xmlns="http://www.w3.org/2000/svg" class="size-8" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -12,12 +12,12 @@
       </div>
 
       <div v-if="isOpen" 
-           class="fixed inset-0 bg-[#0e0c12]/95 backdrop-blur-sm z-40 pt-20">
+           class="fixed inset-0 bg-primary/95 backdrop-blur-sm z-40 pt-20">
         <ul class="flex flex-col items-center gap-8 text-lg">
           <li v-for="item in menuItems" :key="item.id">
             <a :href="item.href" 
                @click.prevent="scrollToSection(item.href)"
-               class="text-white/70 hover:text-white transition-colors">
+               class="hover:text-white transition-colors">
               {{ item.name }}
             </a>
           </li>
@@ -26,12 +26,12 @@
     </nav>
     
     <nav class="hidden fixed md:flex w-full justify-center transition-all duration-300" 
-         :class="{'shadow-lg bg-[#0e0c12]/95 backdrop-blur-sm': scrolled}">
+         :class="{'shadow-lg backdrop-blur-md': scrolled}">
       <ul class="flex justify-center items-center p-4 px-6 rounded-xl gap-5 mx-6 my-4 ">
         <li v-for="item in menuItems" :key="item.id">
           <a :href="item.href" 
             @click.prevent="scrollToSection(item.href)"
-            class="text-white/70 hover:text-white transition-colors hover:bg-white/30 py-2 px-4 rounded-full">
+            class="transition-colors opacity-60 hover:opacity-100 py-2 px-4 rounded-full">
             {{ item.name }}
           </a>
         </li>

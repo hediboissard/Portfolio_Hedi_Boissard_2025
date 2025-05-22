@@ -4,34 +4,35 @@
     <div class="flex items-center gap-2 md:gap-4">
 
       <button @click="prevSlide" 
-              class="border-1 md:border-2 border-white/40 p-1 md:p-4 rounded-full cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              class="group border-1 md:border-2 border-primary/40 bg-accent p-1 md:p-4 rounded-full cursor-pointer hidden md:flex">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8 opacity-50 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
 
-      <div class="overflow-hidden">
-        <div class="flex transition-transform duration-500 ease-in-out"
-             :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+      <div class="overflow-x-auto hide-scrollbar snap-x" 
+           ref="sliderContainer"
+           @scroll="handleScroll">
+        <div class="flex">
           <div v-for="(project, index) in projects" 
                :key="index" 
-               class="w-full flex-shrink-0 px-1 md:px-4">
-            <div class="bg-[#1E293B] rounded-2xl md:rounded-4xl overflow-hidden h-full p-6 md:p-8">
+               class="w-full flex-shrink-0 px-1 md:px-4 snap-center">
+            <div class="bg-accent rounded-2xl md:rounded-4xl overflow-hidden h-full p-6 md:p-8">
               <h3 class="text-base md:text-xl font-semibold mb-1 md:mb-2">{{ project.title }}</h3>
-              <p class="text-white/70 mb-2 md:mb-4 text-xs md:text-base line-clamp-3 md:line-clamp-none">{{ project.description }}</p>
+              <p class="opacity-70 mb-6 md:mb-8 text-xs md:text-base line-clamp-3 md:line-clamp-none">{{ project.description }}</p>
               <div class="flex flex-wrap gap-1 md:gap-2 mb-2 md:mb-4">
                 <span v-for="tech in project.technologies" 
                       :key="tech"
-                      class="bg-[#007198] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">
+                      class="bg-secondary text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">
                   {{ tech }}
                 </span>
               </div>
               <a :href="project.github" 
                  target="_blank"
-                 class="flex items-center gap-1 md:gap-2 text-white/70 hover:text-white text-xs md:text-base bg-black/20 hover:bg-[#007198] transition-colors rounded-full p-2 justify-center">
-                <img src="/assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5">
+                 class="group flex items-center gap-1 md:gap-2 opacity-70 hover:text-white text-xs md:text-base bg-primary hover:bg-secondary transition-colors rounded-full p-2 justify-center">
+                <img src="/assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5 invert group-hover:invert-0">
                 GitHub
-                <img src="/assets/external_link.svg" class="size-4 invert " alt="">
+                <img src="/assets/external_link.svg" class="size-4 group-hover:invert" alt="">
               </a>
             </div>
           </div>
@@ -39,8 +40,8 @@
       </div>
 
       <button @click="nextSlide" 
-              class="border-1 md:border-2 border-white/40 p-1 md:p-4 rounded-full cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              class="group border-1 md:border-2 border-primary/40 bg-accent p-1 md:p-4 rounded-full cursor-pointer hidden md:flex">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8 opacity-50 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
@@ -49,16 +50,16 @@
     <div class="flex justify-center gap-2 md:gap-3 mt-4 md:mt-6">
       <button v-for="(_, index) in projects" 
               :key="index"
-              @click="currentIndex = index"
-              class="w-2 h-2 md:w-4 md:h-4 rounded-full transition-all duration-300 hover:scale-125"
-              :class="index === currentIndex ? 'bg-[#007198] scale-110' : 'bg-gray-400'">
+              @click="scrollToSlide(index)"
+              class="w-2 h-2 md:w-4 md:h-4 rounded-full transition-all duration-300 active:scale-125 hover:scale-125"
+              :class="index === currentIndex ? 'bg-[#007198] scale-110' : 'bg-gray-400/50 hover:bg-gray-400'">
       </button>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const currentIndex = ref(0)
 
@@ -88,12 +89,105 @@ const projects = [
     github: "https://github.com/hediboissard/Comptinou"
   }
 ]
+const sliderContainer = ref<HTMLElement | null>(null)
 
+// Fonction pour faire défiler vers un slide spécifique
+const scrollToSlide = (index: number) => {
+  if (sliderContainer.value) {
+    const slideWidth = sliderContainer.value.clientWidth
+    sliderContainer.value.scrollTo({
+      left: slideWidth * index,
+      behavior: 'smooth'
+    })
+    currentIndex.value = index
+  }
+}
+
+// Modifier les fonctions existantes
 const nextSlide = () => {
-  currentIndex.value = (currentIndex.value + 1) % projects.length
+  const nextIndex = (currentIndex.value + 1) % projects.length
+  scrollToSlide(nextIndex)
 }
 
 const prevSlide = () => {
-  currentIndex.value = currentIndex.value === 0 ? projects.length - 1 : currentIndex.value - 1
+  const prevIndex = currentIndex.value === 0 ? projects.length - 1 : currentIndex.value - 1
+  scrollToSlide(prevIndex)
 }
+
+// Fonction pour détecter le slide actif pendant le scroll
+let isScrolling: number | null = null
+
+const handleScroll = () => {
+  if (isScrolling !== null) {
+    window.clearTimeout(isScrolling)
+  }
+
+  isScrolling = window.setTimeout(() => {
+    if (sliderContainer.value) {
+      const scrollPosition = sliderContainer.value.scrollLeft
+      const slideWidth = sliderContainer.value.clientWidth
+      const rawIndex = scrollPosition / slideWidth
+      
+      // Calculer l'index le plus proche avec une préférence pour la slide suivante
+      const progress = rawIndex % 1
+      const newIndex = progress > 0.3 
+        ? Math.ceil(rawIndex) 
+        : Math.floor(rawIndex)
+
+      if (newIndex >= 0 && newIndex < projects.length) {
+        currentIndex.value = newIndex
+        // Force le scroll vers la slide choisie
+        sliderContainer.value.scrollTo({
+          left: slideWidth * newIndex,
+          behavior: 'smooth'
+        })
+      }
+    }
+    isScrolling = null
+  }, 100) // Délai réduit pour une réaction plus rapide
+}
+
+onMounted(() => {
+  if (sliderContainer.value) {
+    sliderContainer.value.addEventListener('scroll', handleScroll)
+  }
+})
+
+onUnmounted(() => {
+  if (sliderContainer.value) {
+    sliderContainer.value.removeEventListener('scroll', handleScroll)
+  }
+  if (isScrolling !== null) {
+    window.clearTimeout(isScrolling)
+  }
+})
 </script>
+
+<style scoped>
+/* Masquer la scrollbar tout en gardant la fonctionnalité */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari and Opera */
+}
+
+/* Assurer un défilement fluide */
+.snap-x {
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity; /* Changé de mandatory à proximity */
+}
+
+.snap-center {
+  scroll-snap-align: center;
+}
+
+/* Amélioration du comportement tactile */
+@media (hover: none) {
+  .snap-x {
+    scroll-snap-type: x proximity;
+  }
+}
+</style>
