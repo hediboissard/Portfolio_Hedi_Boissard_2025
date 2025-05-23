@@ -41,7 +41,7 @@
              target="_blank"
              class="text-accent dark:text-accent-dark flex items-center gap-2">
             Documentation
-            <img src="/assets/external_link.svg" class="size-4" alt="">
+            <img src="/assets/external_link.svg" class="size-4 dark:invert" alt="">
           </a>
         </div>
       </div>
