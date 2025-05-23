@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-primary text-black">
+  <div class="bg-primary text-black dark:bg-primary-dark dark:text-white duration-300 px-4">
     <Navbar />
     <Home />
     <About />
     <Experience />
     <CV />
     <Project />
-    <Compétence />
+    <Skills />
     <Contact />
   </div>
 </template>
@@ -17,7 +17,7 @@ import About from './components/About.vue'
 import Experience from './components/Experience.vue'
 import CV from './components/CV.vue'
 import Project from './components/Project.vue'
-import Compétence from './components/Skills.vue'
+import Skills from './components/Skills.vue'
 import Contact from './components/Contact.vue'
 import Home from './components/Home.vue'
 </script>

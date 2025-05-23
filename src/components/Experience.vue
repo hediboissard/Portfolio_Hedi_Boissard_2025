@@ -1,19 +1,19 @@
 <template>
-  <section id="experience" class="my-20 max-w-4xl mx-6 md:mx-auto">
+  <section id="experience" class="my-20 max-w-4xl md:mx-auto">
     <h2 class="text-3xl font-bold mb-8 text-center">Expériences</h2>
     <div class="flex flex-col gap-6">
       <div v-for="(exp, index) in experiences" 
            :key="index" 
-           class="bg-accent p-6 rounded-3xl">
+           class="bg-secondary dark:bg-secondary-dark p-6 rounded-3xl">
         <div class="flex flex-col mb-4">
           <div class="flex items-start mb-2 justify-between">
             <div>
               <h3 class="text-lg font-semibold">{{ exp.title }}</h3>
               <h4 class="opacity-70">{{ exp.job }}</h4>
             </div>
-            <a class="text-secondary text-xs flex items-center gap-2 rounded-lg bg-gray-200 p-2" target="_blank"
+            <a class="text-secondary text-xs flex items-center gap-2 rounded-lg bg-accent dark:bg-accent-dark p-2" target="_blank"
               :href="exp.website">{{ exp.company }}
-              <img class="size-3 md:size-4  opacity-70" src="/assets/external_link.svg" alt="">
+              <img class="size-3 md:size-4 invert opacity-70" src="/assets/external_link.svg" alt="">
             </a>
           </div>
           <span class="opacity-50 text-sm mb-2">{{ exp.period }}</span>

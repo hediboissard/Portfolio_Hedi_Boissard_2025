@@ -4,7 +4,7 @@
     <div class="flex items-center gap-2 md:gap-4">
 
       <button @click="prevSlide" 
-              class="group border-1 md:border-2 border-primary/40 bg-accent p-1 md:p-4 rounded-full cursor-pointer hidden md:flex">
+              class="group border-1 md:border-2 border-secondary/10 bg-secondary dark:bg-secondary-dark p-1 md:p-4 rounded-full cursor-pointer hidden md:flex">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8 opacity-50 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
@@ -17,22 +17,22 @@
           <div v-for="(project, index) in projects" 
                :key="index" 
                class="w-full flex-shrink-0 px-1 md:px-4 snap-center">
-            <div class="bg-accent rounded-2xl md:rounded-4xl overflow-hidden h-full p-6 md:p-8">
+            <div class="bg-secondary dark:bg-secondary-dark rounded-2xl md:rounded-4xl overflow-hidden h-full p-6 md:p-8">
               <h3 class="text-base md:text-xl font-semibold mb-1 md:mb-2">{{ project.title }}</h3>
               <p class="opacity-70 mb-6 md:mb-8 text-xs md:text-base line-clamp-3 md:line-clamp-none">{{ project.description }}</p>
               <div class="flex flex-wrap gap-1 md:gap-2 mb-2 md:mb-4">
                 <span v-for="tech in project.technologies" 
                       :key="tech"
-                      class="bg-secondary text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">
+                      class="bg-accent dark:bg-accent-dark text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">
                   {{ tech }}
                 </span>
               </div>
               <a :href="project.github" 
                  target="_blank"
-                 class="group flex items-center gap-1 md:gap-2 opacity-70 hover:text-white text-xs md:text-base bg-primary hover:bg-secondary transition-colors rounded-full p-2 justify-center">
-                <img src="/assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5 invert group-hover:invert-0">
+                 class="group flex items-center gap-1 md:gap-2 opacity-70 hover:text-white text-xs md:text-base bg-primary dark:bg-primary-dark dark:hover:bg-accent-dark hover:bg-accent transition-colors rounded-full p-2 justify-center">
+                <img src="/assets/GitHub.svg" alt="GitHub" class="w-3 h-3 md:w-5 md:h-5 invert dark:invert-0 group-hover:invert-0">
                 GitHub
-                <img src="/assets/external_link.svg" class="size-4 group-hover:invert" alt="">
+                <img src="/assets/external_link.svg" class="size-4 group-hover:invert dark:invert" alt="">
               </a>
             </div>
           </div>
@@ -40,7 +40,7 @@
       </div>
 
       <button @click="nextSlide" 
-              class="group border-1 md:border-2 border-primary/40 bg-accent p-1 md:p-4 rounded-full cursor-pointer hidden md:flex">
+              class="group border-1 md:border-2 border-secondary/10 bg-secondary dark:bg-secondary-dark p-1 md:p-4 rounded-full cursor-pointer hidden md:flex">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-8 md:w-8 opacity-50 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>

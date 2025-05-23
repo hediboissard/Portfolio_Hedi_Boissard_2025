@@ -7,7 +7,7 @@
         <button v-for="skill in skills" 
              :key="skill.name"
              @click="openPopup(skill)"
-             class="group flex flex-col items-center gap-2 p-6 bg-accent rounded-2xl  transition-all duration-300 cursor-pointer">
+             class="group flex flex-col items-center gap-2 p-6 bg-secondary dark:bg-secondary-dark rounded-2xl  transition-all duration-300 cursor-pointer">
           <img :src="`/assets/skills/${skill.logo}`" 
                :alt="skill.name"
                class="size-10 md:w-16 md:h-16">
@@ -18,7 +18,7 @@
     <div v-if="selectedSkill" 
          class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
          @click="closePopup">
-      <div class="bg-accent p-6 rounded-xl max-w-md w-full transform transition-all duration-300"
+      <div class="bg-secondary dark:bg-secondary-dark p-6 rounded-xl max-w-md w-full transform transition-all duration-300"
            :class="{ 'scale-100 opacity-100': isOpen, 'scale-95 opacity-0': !isOpen }"
            @click.stop>
         <div class="flex mb-4 justify-between">
@@ -39,7 +39,7 @@
         <div class="flex justify-between items-center">
           <a :href="selectedSkill.website" 
              target="_blank"
-             class="text-secondary flex items-center gap-2">
+             class="text-accent dark:text-accent-dark flex items-center gap-2">
             Documentation
             <img src="/assets/external_link.svg" class="size-4" alt="">
           </a>

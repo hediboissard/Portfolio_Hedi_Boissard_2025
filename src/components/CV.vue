@@ -3,7 +3,7 @@
     <a 
       href="/assets/CV_Hedi_Boissard.pdf" 
       download="CV_Hedi_Boissard" 
-      class="p-4 md:px-8 rounded-full bg-secondary text-white flex items-center gap-2"
+      class="p-4 md:px-8 rounded-full bg-accent dark:bg-accent-dark text-white flex items-center gap-2"
     >
       <img class="size-6 md:size-8 invert" src="/assets/download.svg" alt="Download Icon">
       Télécharger mon CV

@@ -1,9 +1,37 @@
 <template>
-  <header class="fixed w-full top-0 left-0 right-0 z-50">
-    <nav class="p-6 md:hidden">
-      <div class="flex items-center justify-end">
-        <button @click="toggleMenu" class="text-black focus:outline-none cursor-pointer z-50">
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-8" fill="none"
+  <header class="w-full top-0 left-0 right-0 z-50">
+    <nav class="pt-4 md:hidden flex">
+      <button @click="toggleTheme"> 
+              <svg 
+        v-if="theme === 'dark'"
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-6 w-6 text-white" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      
+      <!-- Icône Lune pour le mode clair -->
+      <svg 
+        v-else
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-6 w-6 text-gray-800" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+      <path 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    stroke-width="2" 
+    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+  /></svg> 
+      </button>
+      <div class="flex items-center justify-end w-full">
+        <button @click="toggleMenu" class="fixed text-black focus:outline-none cursor-pointer z-50">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-8 dark:text-white" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                   d="M4 6h20M4 12h20M4 18h20" />
@@ -25,7 +53,7 @@
       </div>
     </nav>
     
-    <nav class="hidden fixed md:flex w-full justify-center transition-all duration-300" 
+    <nav class="hidden fixed md:flex w-full justify-center items-center transition-all duration-300" 
          :class="{'shadow-lg backdrop-blur-md': scrolled}">
       <ul class="flex justify-center items-center p-4 px-6 rounded-xl gap-5 mx-6 my-4 ">
         <li v-for="item in menuItems" :key="item.id">
@@ -36,6 +64,34 @@
           </a>
         </li>
       </ul>
+      <button @click="toggleTheme" class="flex bg-secondary dark:bg-secondary-dark size-10 justify-center items-center rounded-full"> 
+              <svg 
+        v-if="theme === 'dark'"
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-6 w-6 text-white" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      
+      <!-- Icône Lune pour le mode clair -->
+      <svg 
+        v-else
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-6 w-6 text-gray-800" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+      <path 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    stroke-width="2" 
+    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+  /></svg> 
+      </button>
     </nav>
   </header>
 </template>
@@ -74,6 +130,20 @@ const scrollToSection = (href: string) => {
 const handleScroll = () => {
   scrolled.value = window.scrollY > 20
 }
+const theme = ref(localStorage.getItem('theme') || 'dark')
+
+const toggleTheme = () => {
+  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+  localStorage.setItem('theme', theme.value)
+  document.documentElement.classList.toggle('dark')
+}
+
+onMounted(() => {
+  // Vérifier le thème au chargement
+  if (theme.value === 'dark') {
+    document.documentElement.classList.add('dark')
+  }
+})
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)

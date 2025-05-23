@@ -9,12 +9,12 @@
       </div>
       <div class="md:w-3/5">
         <div class="flex flex-wrap gap-3 mb-6">
-          <span class="bg-secondary text-primary px-4 py-2 rounded-full text-sm">Autonomie</span>
-          <span class="bg-secondary text-primary px-4 py-2 rounded-full text-sm">Esprit d'équipe</span>
-          <span class="bg-secondary text-primary px-4 py-2 rounded-full text-sm">Créativité</span>
-          <span class="bg-secondary text-primary px-4 py-2 rounded-full text-sm">Adaptabilité</span>
+          <span class="bg-accent dark:bg-accent-dark text-primary px-4 py-2 rounded-full text-sm">Autonomie</span>
+          <span class="bg-accent dark:bg-accent-dark text-primary px-4 py-2 rounded-full text-sm">Esprit d'équipe</span>
+          <span class="bg-accent dark:bg-accent-dark text-primary px-4 py-2 rounded-full text-sm">Créativité</span>
+          <span class="bg-accent dark:bg-accent-dark text-primary px-4 py-2 rounded-full text-sm">Adaptabilité</span>
         </div>
-        <p class="leading-relaxed">
+        <p>
           Je suis un développeur web passionné, actuellement en deuxième année de formation.
           Mon objectif est de créer des expériences web innovantes et intuitives.
           Je suis à la recherche d'une alternance pour mettre en pratique mes compétences

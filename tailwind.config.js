@@ -8,12 +8,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#E8E8E8',
-        'primary-dark': '#0e0c12',
-        accent: '#FFFFFF',
-        'accent-dark': '#007198',
-        secondary: '#3399BB',
-        'secondary-dark': '#007198'
+        primary: {
+          light: '#E8E8E8',
+          DEFAULT: '#E8E8E8',
+          dark: '#0e0c12'
+        },
+        secondary: {
+          light: '#FFFFFF',
+          DEFAULT: '#FFFFFF',
+          dark: '#1E293B',
+        },
+        accent: {
+          light: '#3399BB',
+          DEFAULT: '#3399BB',
+          dark: '#007198'
+        },
       }
     },
   },

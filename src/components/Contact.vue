@@ -8,11 +8,11 @@
            :key="link.name"
            :href="link.url"
            class="flex flex-col md:flex-row items-center gap-3 opacity-75 hover:opacity-100 mb-5">
-            <img :src="link.img_src" :alt="link.name" class="size-10 opacity-75 invert">
+            <img :src="link.img_src" :alt="link.name" class="size-10 opacity-75 invert dark:invert-0">
           {{ link.name }}
         </a>
       </div>
-      <div class="bg-accent p-6 md:p-8 rounded-xl">
+      <div class="bg-secondary dark:bg-secondary-dark p-6 md:p-8 rounded-xl">
         <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -21,7 +21,7 @@
                      id="name" 
                      v-model="form.name"
                      placeholder="Votre nom"
-                     class="w-full bg-primary p-2 rounded-lg text-black border placeholder:text-white  border-white/10 focus:border-secondary outline-none"
+                     class="w-full bg-primary dark:bg-primary-dark/50 p-2 rounded-lg border  border-white/10 focus:border-secondary outline-none"
                      required>
             </div>
             <div>
@@ -30,7 +30,7 @@
                      id="email" 
                      v-model="form.email"
                      placeholder="votre@email.com"
-                     class="w-full bg-primary p-2 rounded-lg text-black border placeholder:text-white  border-white/10 focus:border-secondary outline-none"
+                     class="w-full bg-primary dark:bg-primary-dark/50 p-2 rounded-lg border border-white/10 focus:border-secondary outline-none"
                      required>
             </div>
           </div>
@@ -40,11 +40,11 @@
                       v-model="form.message"
                       placeholder="Votre message..."
                       rows="5"
-                      class="w-full bg-primary p-2 rounded-lg text-black border placeholder:text-white  border-white/10 focus:border-secondary outline-none"
+                      class="w-full bg-primary dark:bg-primary-dark/50 p-2 rounded-lg border border-white/10 focus:border-secondary outline-none"
                       required></textarea>
           </div>
           <button type="submit" 
-                  class="bg-secondary text-white py-4 px-6 rounded-lg hover:bg-[#005A7A] transition-colors w-full">
+                  class="bg-accent dark:bg-accent-dark text-white py-4 px-6 rounded-lg hover:bg-accent dark:hover:bg-accent-dark transition-colors w-full">
             Envoyer
           </button>
         </form>
