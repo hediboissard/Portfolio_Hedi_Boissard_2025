@@ -53,7 +53,7 @@
       </div>
     </nav>
     
-    <nav class="hidden fixed md:flex w-full justify-center items-center transition-all duration-300" 
+    <nav class="hidden fixed md:flex w-full justify-center items-center transition-all duration-300 z-50" 
          :class="{'shadow-lg backdrop-blur-md': scrolled}">
       <ul class="flex justify-center items-center p-4 px-6 rounded-xl gap-5 mx-6 my-4 ">
         <li v-for="item in menuItems" :key="item.id">
