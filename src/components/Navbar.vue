@@ -1,6 +1,6 @@
 <template>
   <header class="w-full top-0 left-0 right-0 z-50">
-    <nav class="pt-4 md:hidden flex">
+    <nav class="pt-8 px-2 md:hidden flex">
       <button @click="toggleTheme"> 
               <svg 
         v-if="theme === 'dark'"
@@ -40,7 +40,7 @@
       </div>
 
       <div v-if="isOpen" 
-           class="fixed inset-0 bg-primary/95 backdrop-blur-sm z-40 pt-20">
+           class="fixed inset-0 bg-primary/95 dark:bg-primary-dark/95 backdrop-blur-sm z-40 pt-20">
         <ul class="flex flex-col items-center gap-8 text-lg">
           <li v-for="item in menuItems" :key="item.id">
             <a :href="item.href" 

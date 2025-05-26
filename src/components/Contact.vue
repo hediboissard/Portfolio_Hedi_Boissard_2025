@@ -1,6 +1,11 @@
 <template>
   <section id="contact" class="min-h-screen py-20">
     <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Contact</h2>
+    <div v-if="message" 
+         class="fixed top-5 left-1/2 -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg text-center min-w-[300px]"
+         :class="message.includes('succès') ? 'bg-green-500 text-white' : 'bg-red-500 text-white'">
+      {{ message }}
+    </div>
     
     <div class="max-w-4xl mx-auto px-4">
       <div class="flex flex-row w-full justify-between gap-4 my-15">
@@ -81,14 +86,35 @@ const form = ref({
   email: '',
   message: ''
 })
+const isLoading = ref(false)
+const message = ref('')
 
-const handleSubmit = () => {
-  console.log('Formulaire soumis:', form.value)
-  
-  form.value = {
-    name: '',
-    email: '',
-    message: ''
+const handleSubmit = async () => {
+  try {
+    isLoading.value = true
+    
+    const response = await fetch('https://server-three-pi-90.vercel.app/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form.value)
+    })
+
+    const data = await response.json()
+    
+    if (!response.ok) throw new Error(data.message)
+    
+    message.value = 'Message envoyé avec succès !'
+    form.value = { name: '', email: '', message: '' }
+    setTimeout(() => {
+      message.value = ''
+    }, 3000)
+  } catch (error) {
+    console.error('Erreur:', error)
+    message.value = 'Erreur lors de l\'envoi du message.'
+  } finally {
+    isLoading.value = false
   }
 }
 </script>

@@ -36,7 +36,7 @@
         
       <div class="w-full justify-center flex">
         <button @click="scrollToAbout" class="absolute bottom-10 animate-bounce cursor-pointer">
-          <img class="invert opacity-70" src="/assets/fleche.svg" alt="Défiler vers À propos">
+          <img class="invert dark:invert-0 opacity-70" src="/assets/fleche.svg" alt="Défiler vers À propos">
         </button>
       </div>
     </div>
