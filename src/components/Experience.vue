@@ -33,16 +33,18 @@
 
 <script setup lang="ts">
 const experiences = [
-  {
+{
     title: "Stage",
     job:"Développeur FullStack",
     company: "DotScreen",
     period: "Avril - Juin 2025",
     website: "https://dotscreen.com/",
     details: [
-      "Projet web en ReactJS : création d'interfaces responsives",
-      "Travail en équipe et autonomie sur certaines tâches",
-      "Développement d'interfaces web avec un focus sur la qualité du code"
+      "Développement de nouvelles fonctionnalités pour deux plateformes de streaming : TV5MONDE+ (France) et Rakuten Viki (international)",
+      "Utilisation de React.js pour le web et d’une librairie interne dédiée au développement Smart TV",
+      "Formation approfondie en TypeScript dispensée par un développeur de l’entreprise",
+      "Apprentissage de la récupération et de l’exploitation des données via des API REST",
+      "Maîtrise de l’utilisation des breakpoints pour le débogage et de la console développeur"
     ]
   },
   {
