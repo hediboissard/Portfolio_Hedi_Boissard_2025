@@ -3,7 +3,7 @@
     <div class="flex flex-col h-svh  max-w-2xl mx-auto ">
       <div class="flex flex-col md:flex-row-reverse items-center justify-between mt-20 md:mt-0 md:h-3/4 md:gap-5 ">
         <div class="w-40 mb-10 md:mb-0 md:w-80 rounded-full bg-accent dark:bg-accent-dark p-1 self-center">
-          <img src="/assets/pp_Hedi.jpeg"class="size-full rounded-full" alt="Photo de profil" />
+          <img src="/assets/pp_Hedi.jpeg"class="size-full rounded-full dark:grayscale" alt="Photo de profil" />
         </div>
         <div class="flex flex-col justify-center">
           <h1 class="text-3xl md:text-4xl">
