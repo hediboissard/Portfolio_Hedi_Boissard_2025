@@ -68,4 +68,4 @@ npm run type-check
 
 - GitHub: [@hediboissard](https://github.com/hediboissard)
 - LinkedIn: [Hédi Boissard](https://linkedin.com/in/hédi-boissard-a994ab25b)
-- Email: hboissard23@gmail.com
+- Email: boissardhedi@gmail.com
