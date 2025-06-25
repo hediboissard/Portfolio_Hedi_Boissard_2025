@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary text-black dark:bg-primary-dark dark:text-white duration-300 px-4">
+  <div class="bg-primary  text-black dark:bg-primary-dark dark:text-white duration-300 px-4">
     <Navbar />
     <Home />
     <About />
