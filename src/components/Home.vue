@@ -61,7 +61,7 @@ const words = [
   'web',
   '& application',
   'en',
-  '2ème',
+  '3ème',
   'année',
   'à',
   'la',
