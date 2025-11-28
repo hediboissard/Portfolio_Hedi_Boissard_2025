@@ -4,8 +4,10 @@
       <h2 class="text-3xl font-bold mb-4 text-center">{{ t('experience.title') }}</h2>
       <p class="text-center opacity-60 mb-12">{{ t('experience.subtitle') }}</p>
       
-      <div class="space-y-8 border-l-2 border-accent/30 ml-4 md:ml-0 md:pl-8">
-        <div v-for="(exp, index) in experiences" :key="index" class="relative pl-8 md:pl-0">
+      <div class="space-y-8 border-l-2 border-accent/30 ml-4 md:ml-0">
+        
+        <div v-for="(exp, index) in experiences" :key="index" class="relative pl-8">
+          
           <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent border-4 border-primary dark:border-primary-dark"></div>
           
           <div class="bg-primary dark:bg-primary-dark p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
