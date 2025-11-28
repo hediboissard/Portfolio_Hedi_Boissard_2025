@@ -103,7 +103,7 @@ const messages = {
       },
       placeholders: {
         name: 'Votre nom',
-        email: 'votre@email.com',
+        email: "votre{'@'}email.com",
         message: 'Votre message...'
       },
       buttons: {
@@ -224,7 +224,7 @@ const messages = {
       },
       placeholders: {
         name: 'Your name',
-        email: 'your@email.com',
+        email: "your{'@'}email.com",
         message: 'Your message...'
       },
       buttons: {
