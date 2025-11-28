@@ -33,6 +33,7 @@ const messages = {
       items: [
         {
           job: 'Développeur FullStack',
+          period: 'Avril - Juin 2025',
           details: [
             'Développement de nouvelles fonctionnalités pour TV5MONDE+ et Rakuten Viki',
             'Utilisation de React.js et développement Smart TV',
@@ -42,6 +43,7 @@ const messages = {
         },
         {
           job: 'Développeur Front-End',
+          period: 'Avril - Juillet 2024',
           details: [
             'Refonte de l\'application France TV sur box Free',
             'Développement en HTML, CSS, JS et QML',
@@ -50,6 +52,7 @@ const messages = {
         },
         {
           job: 'Découverte des métiers',
+          period: 'Décembre 2020',
           details: [
             'Immersion dans l\'univers des médias numériques',
             'Assistance sur les plateaux de production'
@@ -91,7 +94,6 @@ const messages = {
     cv: {
       download: 'Télécharger mon CV'
     },
-    // SECTION CONTACT CORRIGÉE ET RESTRUCTURÉE
     contact: {
       title: 'Contact',
       labels: {
@@ -152,6 +154,7 @@ const messages = {
       items: [
         {
           job: 'FullStack Developer',
+          period: 'April - June 2025',
           details: [
             'Developing features for TV5MONDE+ and Rakuten Viki',
             'Using React.js and Smart TV internal libraries',
@@ -161,6 +164,7 @@ const messages = {
         },
         {
           job: 'Front-End Developer',
+          period: 'April - July 2024',
           details: [
             'Revamping France TV app on Free ISP box',
             'Development in HTML, CSS, JS and QML',
@@ -169,6 +173,7 @@ const messages = {
         },
         {
           job: 'Job Shadowing',
+          period: 'December 2020',
           details: [
             'Immersion in digital media industry',
             'Assisting production teams'
@@ -210,7 +215,6 @@ const messages = {
     cv: {
       download: 'Download Resume'
     },
-    // CORRECTION CONTACT (EN)
     contact: {
       title: 'Contact',
       labels: {

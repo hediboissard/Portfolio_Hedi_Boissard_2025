@@ -40,7 +40,7 @@ const experiences = computed(() => [
   {
     job: t('experience.items[0].job'),
     company: 'DotScreen',
-    period: 'Avril - Juin 2025',
+    period: t('experience.items[0].period'),
     details: [
       t('experience.items[0].details[0]'),
       t('experience.items[0].details[1]'),
@@ -51,7 +51,7 @@ const experiences = computed(() => [
   {
     job: t('experience.items[1].job'),
     company: 'DotScreen',
-    period: 'Avril - Juillet 2024',
+    period: t('experience.items[1].period'),
     details: [
       t('experience.items[1].details[0]'),
       t('experience.items[1].details[1]'),
@@ -61,7 +61,7 @@ const experiences = computed(() => [
   {
     job: t('experience.items[2].job'),
     company: 'Webedia',
-    period: 'Décembre 2020',
+    period: t('experience.items[2].period'),
     details: [
       t('experience.items[2].details[0]'),
       t('experience.items[2].details[1]')

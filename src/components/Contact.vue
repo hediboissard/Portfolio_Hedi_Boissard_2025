@@ -10,7 +10,7 @@
            target="_blank"
            class="flex flex-col items-center gap-2 group opacity-70 hover:opacity-100 transition-all">
           <div class="p-4 bg-secondary dark:bg-secondary-dark rounded-full group-hover:scale-110 transition-transform shadow-sm">
-            <img :src="link.img_src" :alt="link.name" class="w-6 h-6 dark:invert">
+            <img :src="link.img_src" :alt="link.name" class="w-6 h-6 brightness-0 dark:invert">
           </div>
           <span class="text-sm font-medium">{{ link.name }}</span>
         </a>

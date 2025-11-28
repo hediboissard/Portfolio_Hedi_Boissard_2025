@@ -33,10 +33,10 @@
 
           <div class="flex gap-6 justify-center md:justify-start pt-4">
             <a href="https://linkedin.com/in/hédi-boissard-a994ab25b" target="_blank" class="opacity-60 hover:opacity-100 transition-opacity hover:text-accent">
-              <img src="/assets/Linkedin.svg" class="size-6 dark:invert" alt="LinkedIn">
+              <img src="/assets/Linkedin.svg" class="size-6 brightness-0 dark:invert" alt="LinkedIn">
             </a>
             <a href="https://github.com/hediboissard" target="_blank" class="opacity-60 hover:opacity-100 transition-opacity hover:text-accent">
-              <img src="/assets/GitHub.svg" class="size-6 dark:invert" alt="GitHub">
+              <img src="/assets/GitHub.svg" class="size-6 brightness-0 dark:invert" alt="GitHub">
             </a>
           </div>
         </div>
