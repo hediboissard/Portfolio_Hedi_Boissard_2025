@@ -6,6 +6,7 @@
       </h2>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
         <div class="bg-primary dark:bg-primary-dark p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
           <h3 class="text-xl font-bold mb-6 text-accent">{{ t('skills.categories.frontend') }}</h3>
           <div class="grid grid-cols-3 gap-4">
@@ -13,7 +14,7 @@
               <div class="p-3 bg-secondary dark:bg-secondary-dark rounded-xl group-hover:scale-110 transition-transform shadow-sm">
                 <img :src="`/assets/skills/${skill.logo}`" :alt="skill.name" class="w-8 h-8">
               </div>
-              <span class="text-sm opacity-70">{{ skill.name }}</span>
+              <span class="text-sm opacity-70 text-center">{{ skill.name }}</span>
             </div>
           </div>
         </div>
@@ -25,7 +26,7 @@
               <div class="p-3 bg-secondary dark:bg-secondary-dark rounded-xl group-hover:scale-110 transition-transform shadow-sm">
                 <img :src="`/assets/skills/${skill.logo}`" :alt="skill.name" class="w-8 h-8">
               </div>
-              <span class="text-sm opacity-70">{{ skill.name }}</span>
+              <span class="text-sm opacity-70 text-center">{{ skill.name }}</span>
             </div>
           </div>
         </div>
@@ -37,7 +38,7 @@
               <div class="p-3 bg-secondary dark:bg-secondary-dark rounded-xl group-hover:scale-110 transition-transform shadow-sm">
                 <img :src="`/assets/skills/${skill.logo}`" :alt="skill.name" class="w-8 h-8">
               </div>
-              <span class="text-sm opacity-70">{{ skill.name }}</span>
+              <span class="text-sm opacity-70 text-center">{{ skill.name }}</span>
             </div>
           </div>
         </div>
@@ -54,16 +55,26 @@ const { t } = useI18n()
 const frontend = [
   { name: 'Vue.js', logo: 'vue.svg' },
   { name: 'React', logo: 'react.svg' },
-  { name: 'Tailwind', logo: 'tailwind.svg' }
+  { name: 'Tailwind', logo: 'tailwind.svg' },
+  { name: 'TypeScript', logo: 'typescript.svg' },
+  { name: 'HTML', logo: 'html.svg' },
+  { name: 'CSS', logo: 'css.svg' }
 ]
+
 const backend = [
   { name: 'Node.js', logo: 'node.svg' },
   { name: 'Symfony', logo: 'symfony.svg' },
   { name: 'Java', logo: 'java.svg' },
-  { name: 'Python', logo: 'python.svg' }
+  { name: 'Python', logo: 'python.svg' },
+  { name: 'PHP', logo: 'php.svg' },
+  { name: 'JavaScript', logo: 'javascript.svg' }
 ]
+
 const tools = [
-  { name: 'MongoDB', logo: 'mongodb.svg' },
-  { name: 'Kotlin', logo: 'kotlin.svg' },
+  { name: 'Git', logo: 'git.svg' },
+  { name: 'JIRA', logo: 'jira.svg' },
+  { name: 'Docker', logo: 'docker.svg' },
+  { name: 'DevOps', logo: 'devops.svg' },
+  { name: 'Design UX/UI', logo: 'design.svg' }
 ]
 </script>
