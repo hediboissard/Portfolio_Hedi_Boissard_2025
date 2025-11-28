@@ -1,7 +1,7 @@
 <template>
   <section id="contact" class="min-h-screen py-20 relative">
     <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">{{ t('nav.contact') }}</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">{{ t('contact.title') }}</h2>
       
       <div class="flex justify-center gap-8 mb-12">
         <a v-for="link in contactLinks" 
@@ -21,7 +21,7 @@
           
           <div class="grid md:grid-cols-2 gap-6">
             <div class="relative">
-              <label for="name" class="block text-sm font-medium mb-2 opacity-80">Nom complet</label>
+              <label for="name" class="block text-sm font-medium mb-2 opacity-80">{{ t('contact.labels.name') }}</label>
               <input 
                 type="text" 
                 id="name" 
@@ -29,13 +29,13 @@
                 @blur="validateField('name')"
                 :class="getInputClass('name')"
                 class="w-full bg-primary/50 dark:bg-primary-dark/50 p-3 rounded-lg border focus:border-accent outline-none transition-all"
-                placeholder="Votre nom"
+                :placeholder="t('contact.placeholders.name')"
               >
               <span v-if="errors.name" class="text-red-500 text-xs absolute -bottom-5 left-0">{{ errors.name }}</span>
             </div>
 
             <div class="relative">
-              <label for="email" class="block text-sm font-medium mb-2 opacity-80">Email</label>
+              <label for="email" class="block text-sm font-medium mb-2 opacity-80">{{ t('contact.labels.email') }}</label>
               <input 
                 type="email" 
                 id="email" 
@@ -43,14 +43,14 @@
                 @blur="validateField('email')"
                 :class="getInputClass('email')"
                 class="w-full bg-primary/50 dark:bg-primary-dark/50 p-3 rounded-lg border focus:border-accent outline-none transition-all"
-                placeholder="votre@email.com"
+                :placeholder="t('contact.placeholders.email')"
               >
               <span v-if="errors.email" class="text-red-500 text-xs absolute -bottom-5 left-0">{{ errors.email }}</span>
             </div>
           </div>
 
           <div class="relative">
-            <label for="message" class="block text-sm font-medium mb-2 opacity-80">Message</label>
+            <label for="message" class="block text-sm font-medium mb-2 opacity-80">{{ t('contact.labels.message') }}</label>
             <textarea 
               id="message" 
               v-model="form.message"
@@ -58,7 +58,7 @@
               rows="5"
               :class="getInputClass('message')"
               class="w-full bg-primary/50 dark:bg-primary-dark/50 p-3 rounded-lg border focus:border-accent outline-none transition-all resize-none"
-              placeholder="Parlez-moi de votre projet..."
+              :placeholder="t('contact.placeholders.message')"
             ></textarea>
             <span v-if="errors.message" class="text-red-500 text-xs absolute -bottom-5 left-0">{{ errors.message }}</span>
           </div>
@@ -78,7 +78,7 @@
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <span v-else>Envoyer le message</span>
+            <span v-else>{{ isLoading ? t('contact.buttons.sending') : t('contact.buttons.send') }}</span>
           </button>
         </form>
       </div>
@@ -87,10 +87,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n() // Utilisation de i18n pour le titre
+const { t } = useI18n()
 
 const contactLinks = [
   { name: 'Mail', url: 'mailto:hboissard23@gmail.com', img_src: '/assets/Mail.svg' },
@@ -98,31 +98,28 @@ const contactLinks = [
   { name: 'GitHub', url: 'https://github.com/hediboissard', img_src: '/assets/GitHub.svg' }
 ]
 
-// État du formulaire
 const form = ref({ name: '', email: '', message: '' })
 const errors = ref({ name: '', email: '', message: '' })
 const isLoading = ref(false)
 const apiMessage = ref('')
 const isSuccess = ref(false)
 
-// Validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const validateField = (field: 'name' | 'email' | 'message') => {
   errors.value[field] = ''
   
   if (field === 'name' && form.value.name.length < 2) {
-    errors.value.name = 'Le nom est trop court.'
+    errors.value.name = t('contact.validation.name_short')
   }
   if (field === 'email' && !emailRegex.test(form.value.email)) {
-    errors.value.email = 'Email invalide.'
+    errors.value.email = t('contact.validation.email_invalid')
   }
   if (field === 'message' && form.value.message.length < 10) {
-    errors.value.message = 'Le message doit contenir au moins 10 caractères.'
+    errors.value.message = t('contact.validation.message_short')
   }
 }
 
-// Helper pour les classes CSS des inputs
 const getInputClass = (field: 'name' | 'email' | 'message') => {
   if (errors.value[field]) return 'border-red-500'
   if (form.value[field] && !errors.value[field]) return 'border-green-500'
@@ -130,7 +127,6 @@ const getInputClass = (field: 'name' | 'email' | 'message') => {
 }
 
 const handleSubmit = async () => {
-  // Validation finale
   validateField('name')
   validateField('email')
   validateField('message')
@@ -139,7 +135,7 @@ const handleSubmit = async () => {
   const isEmpty = !form.value.name || !form.value.email || !form.value.message
   
   if (hasErrors || isEmpty) {
-    if (isEmpty) apiMessage.value = "Veuillez remplir tous les champs."
+    if (isEmpty) apiMessage.value = t('contact.messages.validation_error')
     return
   }
 
@@ -158,16 +154,15 @@ const handleSubmit = async () => {
     if (!response.ok) throw new Error(data.message || 'Erreur inconnue')
     
     isSuccess.value = true
-    apiMessage.value = 'Message envoyé avec succès ! Je vous répondrai bientôt.'
+    apiMessage.value = t('contact.messages.success')
     form.value = { name: '', email: '', message: '' }
     
-    // Reset du message après 5s
     setTimeout(() => { apiMessage.value = ''; isSuccess.value = false }, 5000)
 
   } catch (error) {
     console.error('Erreur:', error)
     isSuccess.value = false
-    apiMessage.value = "Erreur lors de l'envoi. Veuillez réessayer."
+    apiMessage.value = t('contact.messages.error')
   } finally {
     isLoading.value = false
   }

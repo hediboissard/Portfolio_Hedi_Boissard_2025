@@ -2,7 +2,6 @@ import { createI18n } from 'vue-i18n'
 
 const messages = {
   fr: {
-    // Navigation
     nav: {
       home: 'Accueil',
       about: 'À propos',
@@ -11,8 +10,6 @@ const messages = {
       skills: 'Compétences',
       contact: 'Contact'
     },
-
-    // Section Accueil (Home)
     home: {
       greeting: 'Salut, je suis',
       role: 'Développeur Web & Application',
@@ -20,132 +17,110 @@ const messages = {
       cta_projects: 'Voir mes projets',
       cta_contact: 'Me contacter'
     },
-
-    // Section À Propos (About)
     about: {
       title: 'À Propos de Moi',
+      text: 'Je suis un développeur web passionné, actuellement en deuxième année de formation. Mon objectif est de créer des expériences web innovantes et intuitives. Je suis à la recherche d\'une alternance pour mettre en pratique mes compétences et continuer à évoluer dans le domaine du développement web.',
       tags: {
         autonomy: 'Autonomie',
         teamwork: 'Esprit d\'équipe',
         creativity: 'Créativité',
         adaptability: 'Adaptabilité'
-      },
-      text: 'Je suis un développeur web passionné, actuellement en deuxième année de formation. Mon objectif est de créer des expériences web innovantes et intuitives. Je suis à la recherche d\'une alternance pour mettre en pratique mes compétences et continuer à évoluer dans le domaine du développement web.'
+      }
     },
-
-    // Section Expériences
     experience: {
       title: 'Expériences',
       subtitle: 'Mon Parcours',
       items: [
         {
-          title: 'Stage',
           job: 'Développeur FullStack',
-          company: 'DotScreen',
-          period: 'Avril - Juin 2025',
           details: [
             'Développement de nouvelles fonctionnalités pour TV5MONDE+ et Rakuten Viki',
-            'Utilisation de React.js et développement sur Smart TV',
+            'Utilisation de React.js et développement Smart TV',
             'Formation approfondie en TypeScript',
-            'Exploitation des données via des API REST'
+            'Exploitation des données via API REST'
           ]
         },
         {
-          title: 'Stage',
           job: 'Développeur Front-End',
-          company: 'DotScreen',
-          period: 'Avril - Juillet 2024',
           details: [
             'Refonte de l\'application France TV sur box Free',
-            'Développement en HTML, CSS, JS et découverte du QML',
-            'Travail en méthode Agile dans un gros projet technique'
+            'Développement en HTML, CSS, JS et QML',
+            'Travail en méthode Agile'
           ]
         },
         {
-          title: 'Stage',
           job: 'Découverte des métiers',
-          company: 'Webedia',
-          period: 'Décembre 2020',
           details: [
             'Immersion dans l\'univers des médias numériques',
-            'Assistance sur les plateaux de production avec les équipes'
+            'Assistance sur les plateaux de production'
           ]
         }
       ]
     },
-
-    // Section Projets
     projects: {
       title: 'Projets',
-      items: [
-        {
-          title: 'Moodify',
-          description: 'Application web recommandant des musiques selon l\'humeur de l\'utilisateur. Architecture moderne avec l\'API Spotify.'
-        },
-        {
-          title: 'E-commerce Fossiles',
-          description: 'Site de vente en ligne réalisé en Vue.js. Focus particulier sur l\'expérience utilisateur (UX) et le design.'
-        },
-        {
-          title: 'Projet DevOps Cars',
-          description: 'Mise en place d\'un pipeline CI/CD complet. Pratique des concepts fondamentaux de l\'intégration continue.'
-        },
-        {
-          title: 'Comptinou',
-          description: 'Application Android native pour créer des histoires pour enfants. Développement en équipe (Java/Kotlin).'
-        }
-      ]
+      items: {
+        moodify: 'Application web recommandant des musiques selon l\'humeur. Architecture moderne avec l\'API Spotify.',
+        fossiles: 'Site de vente en ligne réalisé en Vue.js. Focus particulier sur l\'expérience utilisateur (UX).',
+        devops: 'Mise en place d\'un pipeline CI/CD complet. Pratique des concepts fondamentaux de l\'intégration continue.',
+        comptinou: 'Application Android native pour créer des histoires pour enfants. Développement en équipe (Java/Kotlin).'
+      }
     },
-
-    // Section Compétences
     skills: {
-      title: 'Compétences',
-      subtitle: 'Cliquez sur un langage pour en savoir plus',
+      title: 'Compétences Techniques',
+      subtitle: 'Cliquez sur un langage pour en savoir plus !',
+      popup_close: 'Fermer',
+      popup_doc: 'Documentation',
       categories: {
         frontend: 'Frontend',
         backend: 'Backend',
-        tools: 'Outils'
+        tools: 'Autres'
       },
       descriptions: {
-        vue: 'Framework JavaScript progressif pour des interfaces réactives. Mon outil principal pour le frontend.',
-        react: 'Bibliothèque pour interfaces dynamiques. Utilisée pour des applications modernes basées sur les composants.',
-        tailwind: 'Framework CSS utilitaire pour un stylisme rapide, responsive et personnalisé.',
-        node: 'Environnement JS côté serveur. Idéal pour créer des API RESTful performantes.',
-        mongodb: 'Base de données NoSQL flexible, parfaite pour les applications scalables.',
-        symfony: 'Framework PHP robuste et modulaire pour des applications web complexes.',
-        java: 'Langage orienté objet robuste, utilisé pour les projets d\'envergure.',
-        kotlin: 'Langage moderne et concis pour le développement Android natif.',
-        python: 'Langage polyvalent pour l\'analyse de données et l\'automatisation.'
+        vue: 'Framework JavaScript progressif pour interfaces réactives.',
+        react: 'Bibliothèque pour interfaces dynamiques et composants.',
+        tailwind: 'Framework CSS utilitaire pour designs rapides.',
+        node: 'Environnement JS serveur pour API RESTful.',
+        mongodb: 'Base NoSQL orientée documents, flexible et scalable.',
+        symfony: 'Framework PHP robuste pour applications complexes.',
+        java: 'Langage objet robuste pour projets d\'entreprise.',
+        kotlin: 'Langage moderne pour Android natif.',
+        python: 'Langage polyvalent pour analyse et automatisation.'
       }
     },
-
-    // Section Contact
+    cv: {
+      download: 'Télécharger mon CV'
+    },
+    // SECTION CONTACT CORRIGÉE ET RESTRUCTURÉE
     contact: {
       title: 'Contact',
       labels: {
-        name: 'Nom complet',
-        email: 'Email professionnel',
-        message: 'Votre projet'
+        name: 'Nom',
+        email: 'Email',
+        message: 'Message'
       },
       placeholders: {
         name: 'Votre nom',
         email: 'votre@email.com',
-        message: 'Dites-m\'en plus...'
+        message: 'Votre message...'
       },
       buttons: {
-        send: 'Envoyer le message',
-        sending: 'Envoi en cours...'
+        send: 'Envoyer',
+        sending: 'Envoi...'
       },
       messages: {
         success: 'Message envoyé avec succès !',
         error: 'Erreur lors de l\'envoi.',
-        validation: 'Veuillez remplir tous les champs correctement.'
+        validation_error: 'Veuillez remplir correctement tous les champs.'
+      },
+      validation: {
+        name_short: 'Le nom est trop court.',
+        email_invalid: 'Email invalide.',
+        message_short: 'Le message doit contenir au moins 10 caractères.'
       }
     }
   },
-
   en: {
-    // Navigation
     nav: {
       home: 'Home',
       about: 'About',
@@ -154,143 +129,121 @@ const messages = {
       skills: 'Skills',
       contact: 'Contact'
     },
-
-    // Hero Section
     home: {
       greeting: 'Hi, I am',
       role: 'Web & App Developer',
       description: 'Student passionate about creating intuitive and high-performance digital experiences. Currently looking for a work-study program.',
-      cta_projects: 'View my work',
-      cta_contact: 'Contact me'
+      cta_projects: 'View Projects',
+      cta_contact: 'Contact Me'
     },
-
-    // About Section
     about: {
       title: 'About Me',
+      text: 'I am a passionate web developer, currently in my second year of training. My goal is to create innovative and intuitive web experiences. I am looking for a work-study position to put my skills into practice and continue to evolve in the web development field.',
       tags: {
         autonomy: 'Autonomy',
         teamwork: 'Teamwork',
         creativity: 'Creativity',
         adaptability: 'Adaptability'
-      },
-      text: 'I am a passionate web developer, currently in my second year of training. My goal is to create innovative and intuitive web experiences. I am looking for a work-study position to put my skills into practice and continue to evolve in the web development field.'
+      }
     },
-
-    // Experience Section
     experience: {
       title: 'Experience',
       subtitle: 'My Journey',
       items: [
         {
-          title: 'Internship',
           job: 'FullStack Developer',
-          company: 'DotScreen',
-          period: 'April - June 2025',
           details: [
-            'Developing new features for TV5MONDE+ and Rakuten Viki',
-            'Using React.js and internal libraries for Smart TV development',
-            'In-depth training in TypeScript',
+            'Developing features for TV5MONDE+ and Rakuten Viki',
+            'Using React.js and Smart TV internal libraries',
+            'In-depth TypeScript training',
             'Data handling via REST APIs'
           ]
         },
         {
-          title: 'Internship',
           job: 'Front-End Developer',
-          company: 'DotScreen',
-          period: 'April - July 2024',
           details: [
-            'Revamping the France TV application on Free ISP boxes',
-            'Development in HTML, CSS, JS and QML discovery',
-            'Agile workflow on a large-scale technical project'
+            'Revamping France TV app on Free ISP box',
+            'Development in HTML, CSS, JS and QML',
+            'Agile workflow experience'
           ]
         },
         {
-          title: 'Internship',
           job: 'Job Shadowing',
-          company: 'Webedia',
-          period: 'December 2020',
           details: [
-            'Immersion in the digital media industry',
-            'Assisting production teams on set'
+            'Immersion in digital media industry',
+            'Assisting production teams'
           ]
         }
       ]
     },
-
-    // Projects Section
     projects: {
       title: 'Projects',
-      items: [
-        {
-          title: 'Moodify',
-          description: 'Web app recommending music based on user mood. Modern architecture utilizing the Spotify API.'
-        },
-        {
-          title: 'Fossils E-commerce',
-          description: 'Online store built with Vue.js. Strong focus on User Experience (UX) and design.'
-        },
-        {
-          title: 'DevOps Cars Project',
-          description: 'Implementation of a complete CI/CD pipeline. Practicing fundamental Continuous Integration concepts.'
-        },
-        {
-          title: 'Comptinou',
-          description: 'Native Android app for creating children\'s stories. Team development using Java/Kotlin.'
-        }
-      ]
+      items: {
+        moodify: 'Web app recommending music based on mood. Modern architecture using Spotify API.',
+        fossiles: 'Online fossils store built with Vue.js. Strong focus on User Experience (UX).',
+        devops: 'Complete CI/CD pipeline implementation. Practicing Continuous Integration concepts.',
+        comptinou: 'Native Android app for children stories. Team development using Java/Kotlin.'
+      }
     },
-
-    // Skills Section
     skills: {
-      title: 'Skills',
-      subtitle: 'Click on a language to learn more',
+      title: 'Technical Skills',
+      subtitle: 'Click on a language to learn more!',
+      popup_close: 'Close',
+      popup_doc: 'Documentation',
       categories: {
         frontend: 'Frontend',
         backend: 'Backend',
-        tools: 'Tools'
+        tools: 'Others'
       },
       descriptions: {
-        vue: 'Progressive JavaScript framework for reactive interfaces. My main tool for frontend development.',
-        react: 'Library for dynamic interfaces. Used for modern component-based applications.',
-        tailwind: 'Utility-first CSS framework for rapid, responsive, and custom styling.',
-        node: 'Server-side JS environment. Ideal for building high-performance RESTful APIs.',
-        mongodb: 'Flexible NoSQL database, perfect for scalable applications.',
-        symfony: 'Robust and modular PHP framework for complex web applications.',
-        java: 'Robust object-oriented language, used for large-scale enterprise projects.',
-        kotlin: 'Modern and concise language for native Android development.',
-        python: 'Versatile language for data analysis and automation.'
+        vue: 'Progressive JS framework for reactive interfaces.',
+        react: 'Library for dynamic user interfaces.',
+        tailwind: 'Utility-first CSS framework for rapid design.',
+        node: 'Server-side JS environment for RESTful APIs.',
+        mongodb: 'Document-oriented NoSQL database.',
+        symfony: 'Robust PHP framework for complex apps.',
+        java: 'Robust object-oriented language for enterprise.',
+        kotlin: 'Modern language for native Android.',
+        python: 'Versatile language for data and automation.'
       }
     },
-
-    // Contact Section
+    cv: {
+      download: 'Download Resume'
+    },
+    // CORRECTION CONTACT (EN)
     contact: {
       title: 'Contact',
       labels: {
-        name: 'Full Name',
-        email: 'Work Email',
-        message: 'Your Project'
+        name: 'Name',
+        email: 'Email',
+        message: 'Message'
       },
       placeholders: {
-        name: 'John Doe',
-        email: 'john@company.com',
-        message: 'Tell me more...'
+        name: 'Your name',
+        email: 'your@email.com',
+        message: 'Your message...'
       },
       buttons: {
-        send: 'Send Message',
+        send: 'Send',
         sending: 'Sending...'
       },
       messages: {
         success: 'Message sent successfully!',
         error: 'Error sending message.',
-        validation: 'Please fill in all fields correctly.'
+        validation_error: 'Please fill all fields correctly.'
+      },
+      validation: {
+        name_short: 'Name is too short.',
+        email_invalid: 'Invalid email.',
+        message_short: 'Message must be at least 10 characters long.'
       }
     }
   }
 }
 
 export const i18n = createI18n({
-  legacy: false, 
-  locale: 'fr', 
+  legacy: false,
+  locale: 'fr',
   fallbackLocale: 'en',
   messages
 })

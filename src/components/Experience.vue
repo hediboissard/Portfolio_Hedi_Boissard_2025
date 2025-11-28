@@ -1,37 +1,29 @@
 <template>
-  <section id="experience" class="py-20 px-4">
+  <section id="experience" class="py-20 px-4 bg-secondary/30 dark:bg-secondary-dark/30">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
-        <span class="border-b-4 border-accent pb-2">Mon Parcours</span>
-      </h2>
+      <h2 class="text-3xl font-bold mb-4 text-center">{{ t('experience.title') }}</h2>
+      <p class="text-center opacity-60 mb-12">{{ t('experience.subtitle') }}</p>
       
-      <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-3 md:ml-6 space-y-12">
-        <div v-for="(exp, index) in experiences" :key="index" class="relative pl-8 md:pl-12">
+      <div class="space-y-8 border-l-2 border-accent/30 ml-4 md:ml-0 md:pl-8">
+        <div v-for="(exp, index) in experiences" :key="index" class="relative pl-8 md:pl-0">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent border-4 border-primary dark:border-primary-dark"></div>
           
-          <span class="absolute -left-[9px] top-0 h-5 w-5 rounded-full border-4 border-white dark:border-[#0e0c12] bg-accent"></span>
-          
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ exp.job }}</h3>
-            <span class="text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-full w-fit mt-2 sm:mt-0">
-              {{ exp.period }}
-            </span>
+          <div class="bg-primary dark:bg-primary-dark p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
+            <div class="flex flex-col md:flex-row justify-between mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-accent">{{ exp.job }}</h3>
+                <h4 class="font-medium opacity-80">{{ exp.company }}</h4>
+              </div>
+              <span class="text-sm opacity-50 bg-secondary dark:bg-secondary-dark px-3 py-1 rounded-full h-fit w-fit mt-2 md:mt-0">
+                {{ exp.period }}
+              </span>
+            </div>
+            <ul class="space-y-2 opacity-70">
+              <li v-for="(detail, i) in exp.details" :key="i" class="flex gap-2">
+                <span>•</span> {{ detail }}
+              </li>
+            </ul>
           </div>
-          
-          <div class="mb-4">
-            <a :href="exp.website" target="_blank" class="text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-accent flex items-center gap-2 w-fit">
-              {{ exp.company }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-          
-          <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-            <li v-for="(detail, i) in exp.details" :key="i" class="flex items-start gap-2">
-              <span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/60"></span>
-              <span>{{ detail }}</span>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -39,38 +31,41 @@
 </template>
 
 <script setup lang="ts">
-const experiences = [
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const experiences = computed(() => [
   {
-    job: "Développeur FullStack",
-    company: "DotScreen",
-    period: "Avril 2025 - Juin 2025",
-    website: "https://dotscreen.com/",
+    job: t('experience.items[0].job'),
+    company: 'DotScreen',
+    period: 'Avril - Juin 2025',
     details: [
-      "Développement de features pour TV5MONDE+ et Rakuten Viki.",
-      "Stack : React.js, TypeScript, API REST.",
-      "Optimisation des performances et debugging avancé."
+      t('experience.items[0].details[0]'),
+      t('experience.items[0].details[1]'),
+      t('experience.items[0].details[2]'),
+      t('experience.items[0].details[3]')
     ]
   },
   {
-    job: "Développeur Front-End",
-    company: "DotScreen",
-    period: "Avril 2024 - Juillet 2024",
-    website: "https://dotscreen.com/",
+    job: t('experience.items[1].job'),
+    company: 'DotScreen',
+    period: 'Avril - Juillet 2024',
     details: [
-      "Refonte de l'application France TV sur box Free.",
-      "Technologies : HTML, CSS, JS, QML.",
-      "Travail en méthode Agile."
+      t('experience.items[1].details[0]'),
+      t('experience.items[1].details[1]'),
+      t('experience.items[1].details[2]')
     ]
   },
   {
-    job: "Stage Découverte",
-    company: "Webedia",
-    period: "Décembre 2020",
-    website: "https://fr.webedia-group.com/",
+    job: t('experience.items[2].job'),
+    company: 'Webedia',
+    period: 'Décembre 2020',
     details: [
-      "Immersion dans l'univers des médias numériques.",
-      "Assistance sur les plateaux de production."
+      t('experience.items[2].details[0]'),
+      t('experience.items[2].details[1]')
     ]
   }
-];
+])
 </script>
