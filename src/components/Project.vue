@@ -91,7 +91,6 @@ const projects = [
 ]
 const sliderContainer = ref<HTMLElement | null>(null)
 
-// Fonction pour faire défiler vers un slide spécifique
 const scrollToSlide = (index: number) => {
   if (sliderContainer.value) {
     const slideWidth = sliderContainer.value.clientWidth
@@ -103,7 +102,6 @@ const scrollToSlide = (index: number) => {
   }
 }
 
-// Modifier les fonctions existantes
 const nextSlide = () => {
   const nextIndex = (currentIndex.value + 1) % projects.length
   scrollToSlide(nextIndex)
@@ -114,7 +112,6 @@ const prevSlide = () => {
   scrollToSlide(prevIndex)
 }
 
-// Fonction pour détecter le slide actif pendant le scroll
 let isScrolling: number | null = null
 
 const handleScroll = () => {
@@ -128,7 +125,6 @@ const handleScroll = () => {
       const slideWidth = sliderContainer.value.clientWidth
       const rawIndex = scrollPosition / slideWidth
       
-      // Calculer l'index le plus proche avec une préférence pour la slide suivante
       const progress = rawIndex % 1
       const newIndex = progress > 0.3 
         ? Math.ceil(rawIndex) 
@@ -136,7 +132,6 @@ const handleScroll = () => {
 
       if (newIndex >= 0 && newIndex < projects.length) {
         currentIndex.value = newIndex
-        // Force le scroll vers la slide choisie
         sliderContainer.value.scrollTo({
           left: slideWidth * newIndex,
           behavior: 'smooth'
@@ -144,7 +139,7 @@ const handleScroll = () => {
       }
     }
     isScrolling = null
-  }, 100) // Délai réduit pour une réaction plus rapide
+  }, 100)
 }
 
 onMounted(() => {
@@ -164,27 +159,23 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Masquer la scrollbar tout en gardant la fonctionnalité */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;             /* Chrome, Safari and Opera */
+  display: none;             
 }
-
-/* Assurer un défilement fluide */
 .snap-x {
   scroll-behavior: smooth;
-  scroll-snap-type: x proximity; /* Changé de mandatory à proximity */
+  scroll-snap-type: x proximity;
 }
 
 .snap-center {
   scroll-snap-align: center;
 }
 
-/* Amélioration du comportement tactile */
 @media (hover: none) {
   .snap-x {
     scroll-snap-type: x proximity;
