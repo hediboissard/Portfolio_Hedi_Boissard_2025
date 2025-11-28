@@ -42,7 +42,7 @@ portfolio/
 └── README.md
 ```
 
-## 📱 Fonctionnalités
+## 📱 Fonctionnalites
 
 - Design responsive
 - Animations fluides
