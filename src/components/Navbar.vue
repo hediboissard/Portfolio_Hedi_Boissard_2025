@@ -37,7 +37,10 @@
       <a v-for="item in menuItems" :key="item.id" :href="item.href" @click="scrollToSection(item.href)" class="text-lg">{{ item.name }}</a>
       <div class="flex gap-4 mt-4">
         <button @click="toggleLanguage">{{ locale.toUpperCase() }}</button>
-        <button @click="toggleTheme">{{ theme === 'dark' ? 'Light' : 'Dark' }}</button>
+        <button @click="toggleTheme">
+          <span v-if="theme === 'dark'">☀️</span>
+          <span v-else>🌙</span>
+        </button>
       </div>
     </div>
   </header>

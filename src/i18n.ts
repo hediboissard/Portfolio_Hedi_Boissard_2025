@@ -19,7 +19,7 @@ const messages = {
     },
     about: {
       title: 'À Propos de Moi',
-      text: 'Je suis un développeur web passionné, actuellement en deuxième année de formation. Mon objectif est de créer des expériences web innovantes et intuitives. Je suis à la recherche d\'une alternance pour mettre en pratique mes compétences et continuer à évoluer dans le domaine du développement web.',
+      text: 'Je suis un développeur web passionné, actuellement en troisième année de formation. Mon objectif est de créer des expériences web innovantes et intuitives. Je suis à la recherche d\'une alternance pour mettre en pratique mes compétences et continuer à évoluer dans le domaine du développement web.',
       tags: {
         autonomy: 'Autonomie',
         teamwork: 'Esprit d\'équipe',
@@ -140,7 +140,7 @@ const messages = {
     },
     about: {
       title: 'About Me',
-      text: 'I am a passionate web developer, currently in my second year of training. My goal is to create innovative and intuitive web experiences. I am looking for a work-study position to put my skills into practice and continue to evolve in the web development field.',
+      text: 'I am a passionate web developer, currently in my third year of training. My goal is to create innovative and intuitive web experiences. I am looking for a work-study position to put my skills into practice and continue to evolve in the web development field.',
       tags: {
         autonomy: 'Autonomy',
         teamwork: 'Teamwork',
