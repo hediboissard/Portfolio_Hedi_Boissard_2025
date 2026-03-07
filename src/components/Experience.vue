@@ -41,13 +41,15 @@ const { t } = useI18n()
 const experiences = computed(() => [
   {
     job: t('experience.items[0].job'),
-    company: 'DotScreen',
+    company: 'VoxTrend',
     period: t('experience.items[0].period'),
     details: [
       t('experience.items[0].details[0]'),
       t('experience.items[0].details[1]'),
       t('experience.items[0].details[2]'),
-      t('experience.items[0].details[3]')
+      t('experience.items[0].details[3]'),
+      t('experience.items[0].details[4]'),
+      t('experience.items[0].details[5]')
     ]
   },
   {
@@ -57,16 +59,27 @@ const experiences = computed(() => [
     details: [
       t('experience.items[1].details[0]'),
       t('experience.items[1].details[1]'),
-      t('experience.items[1].details[2]')
+      t('experience.items[1].details[2]'),
+      t('experience.items[1].details[3]')
     ]
   },
   {
     job: t('experience.items[2].job'),
-    company: 'Webedia',
+    company: 'DotScreen',
     period: t('experience.items[2].period'),
     details: [
       t('experience.items[2].details[0]'),
-      t('experience.items[2].details[1]')
+      t('experience.items[2].details[1]'),
+      t('experience.items[2].details[2]')
+    ]
+  },
+  {
+    job: t('experience.items[3].job'),
+    company: 'Webedia',
+    period: t('experience.items[3].period'),
+    details: [
+      t('experience.items[3].details[0]'),
+      t('experience.items[3].details[1]')
     ]
   }
 ])

@@ -32,6 +32,18 @@ const messages = {
       subtitle: 'Mon Parcours',
       items: [
         {
+          job: 'Développeur FullStack Next.js & IA',
+          period: 'Février - Juillet 2026 (Stage)',
+          details: [
+            'Développement d\'une plateforme SaaS B2B d\'analyse client',
+            'Conception d\'une architecture Fullstack articulée autour d\'interfaces complexes en Next.js (App Router) et d\'un backend modulaire avec NestJS',
+            'Mise en place d\'une messagerie instantanée temps réel via Ably (WebSockets), avec une gestion d\'état globale optimisée sous Zustand',
+            'Développement d\'un Chatbot intelligent intégré à la plateforme pour l\'automatisation de l\'analyse et du support client',
+            'Conception de composants UI réutilisables et de dashboards avec shadcn/ui, Radix UI et Tailwind CSS',
+            'Optimisation du workflow de développement via des outils d\'assistance IA (Cursor, Claude Code) pour garantir la qualité et la robustesse du code'
+          ]
+        },
+        {
           job: 'Développeur FullStack',
           period: 'Avril - Juin 2025',
           details: [
@@ -152,6 +164,18 @@ const messages = {
       title: 'Experience',
       subtitle: 'My Journey',
       items: [
+        {
+          job: 'FullStack Next.js & AI Developer',
+          period: 'February - July 2026 (Internship)',
+          details: [
+            'Development of a B2B SaaS client analysis platform',
+            'Design of a Fullstack architecture with complex Next.js (App Router) interfaces and a modular NestJS backend',
+            'Real-time instant messaging via Ably (WebSockets), with optimized global state management using Zustand',
+            'Development of an intelligent Chatbot integrated into the platform for automated analysis and customer support',
+            'Design of reusable UI components and dashboards with shadcn/ui, Radix UI and Tailwind CSS',
+            'Optimization of the development workflow via AI assistance tools (Cursor, Claude Code) to ensure code quality and robustness'
+          ]
+        },
         {
           job: 'FullStack Developer',
           period: 'April - June 2025',
