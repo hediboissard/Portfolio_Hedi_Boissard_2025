@@ -13,7 +13,7 @@ const messages = {
     home: {
       greeting: 'Salut, je suis',
       role: 'Développeur Web & Application',
-      description: 'Étudiant passionné par la création d\'expériences numériques intuitives et performantes. Actuellement à la recherche d\'une alternance.',
+      description: 'Étudiant passionné par la création d\'expériences numériques intuitives et performantes. Actuellement à la recherche d\'une alternance en Développement FullStack dès septembre 2026.',
       cta_projects: 'Voir mes projets',
       cta_contact: 'Me contacter'
     },
