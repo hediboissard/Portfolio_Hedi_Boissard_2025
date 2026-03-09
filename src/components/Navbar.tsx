@@ -19,7 +19,20 @@ export default function Navbar() {
   const scrollTo = (id: string) => {
     setOpen(false)
     const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (!el) return
+
+    const header = document.querySelector('header')
+    const headerHeight =
+      header && header instanceof HTMLElement ? header.offsetHeight : 64
+
+    const extraOffset = 16
+    const rect = el.getBoundingClientRect()
+    const targetY = rect.top + window.scrollY - headerHeight - extraOffset
+
+    window.scrollTo({
+      top: Math.max(targetY, 0),
+      behavior: 'smooth',
+    })
   }
 
   useEffect(() => {

@@ -8,6 +8,7 @@ export default function Home() {
   const sectionRef = useRef<HTMLElement>(null)
   const [animationKey, setAnimationKey] = useState(0)
   const leftHomeRef = useRef(false)
+  const avatarSrc = `${import.meta.env.BASE_URL}assets/pp_Hedi.png`
 
   useEffect(() => {
     const el = sectionRef.current
@@ -102,7 +103,7 @@ export default function Home() {
 
       <div className="hidden md:flex flex-1 justify-center md:justify-end min-w-0">
         <div className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-[var(--fg)]/10 shadow-[0_0_60px_rgba(56,189,248,0.15)] ring-4 ring-purple-500/20 flex-shrink-0">
-          <img src="../../public/assets/pp_Hedi.png" alt="Hédi Boissard" className="w-full h-full object-cover object-[52%_100%]" />
+          <img src={avatarSrc} alt="Hédi Boissard" className="w-full h-full object-cover object-[52%_100%]" />
         </div>
       </div>
     </section>
