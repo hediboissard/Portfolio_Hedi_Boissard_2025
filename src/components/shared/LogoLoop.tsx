@@ -75,7 +75,7 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
     let offset = 0
     let lastTime = 0
     const dir = direction === 'left' ? 1 : -1
-    const pxPerSecond = Math.max(10, speed) * 2
+    const pxPerSecond = Math.max(15, speed * 1.5)
 
     const tick = (now: number) => {
       const totalWidth = el.scrollWidth
@@ -114,7 +114,7 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
           alt={item.alt ?? item.title ?? ''}
           width={item.width}
           height={item.height}
-          className="h-[var(--logo-size)] w-auto object-contain"
+          className={`h-[var(--logo-size)] w-auto object-contain ${item.src.includes('php.svg') ? 'brightness-0 invert' : ''}`}
           loading="lazy"
           decoding="async"
         />
