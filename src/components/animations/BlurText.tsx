@@ -51,9 +51,21 @@ const BlurText: React.FC<BlurTextProps> = ({
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement | HTMLSpanElement>(null);
 
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setPrefersReduced(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
   const shouldAnimate = triggerAnimationProp !== undefined ? triggerAnimationProp : inView;
 
   useEffect(() => {
+    if (prefersReduced) return;
     if (triggerAnimationProp !== undefined) return;
     const el = ref.current;
     if (!el) return;
@@ -92,6 +104,14 @@ const BlurText: React.FC<BlurTextProps> = ({
   const stepCount = toSnapshots.length + 1;
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
+
+  if (prefersReduced) {
+    return (
+      <Component className={className}>
+        {text}
+      </Component>
+    );
+  }
 
   return (
     <Component ref={ref as React.Ref<HTMLParagraphElement & HTMLSpanElement>} className={`blur-text ${className} flex flex-wrap`}>

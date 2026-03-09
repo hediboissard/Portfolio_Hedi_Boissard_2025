@@ -10,6 +10,28 @@
   --accent: #38bdf8;
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.5) var(--bg);
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.4);
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
+}
+
 body {
   font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   background-color: var(--bg);
@@ -33,6 +55,15 @@ body {
   }
   100% {
     transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes logo-loop-reverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export type LogoItem =
   | {
@@ -21,11 +21,11 @@ export interface LogoLoopProps {
   speed?: number
   direction?: 'left' | 'right'
   logoHeight?: number
+  logoHeightMobile?: number
   gap?: number
-  pauseOnHover?: boolean
+  gapMobile?: number
   fadeOut?: boolean
   fadeOutColor?: string
-  scaleOnHover?: boolean
   ariaLabel?: string
   className?: string
 }
@@ -35,63 +35,71 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
   speed = 80,
   direction = 'left',
   logoHeight = 32,
+  logoHeightMobile,
   gap = 40,
+  gapMobile,
   fadeOut = true,
   fadeOutColor = 'var(--bg)',
-  scaleOnHover = true,
   ariaLabel = 'Logos',
   className
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const trackRef = useRef<HTMLDivElement | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const mql = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(mql.matches)
+    update()
+    mql.addEventListener('change', update)
+    return () => mql.removeEventListener('change', update)
+  }, [])
+
+  const effectiveLogoHeight = (logoHeightMobile != null && isMobile) ? logoHeightMobile : logoHeight
+  const effectiveGap = (gapMobile != null && isMobile) ? gapMobile : gap
 
   useEffect(() => {
     const el = trackRef.current
     if (!el) return
 
-    const prefersReduced =
+    const prefersReducedMotion =
       typeof window !== 'undefined' &&
-      window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (prefersReduced) {
+    if (prefersReducedMotion) {
       el.style.transform = 'translate3d(0, 0, 0)'
       return
     }
 
-    const totalWidth = el.scrollWidth
-    if (!totalWidth) return
-
-    const singleWidth = totalWidth / 2
-    if (!singleWidth) return
-
+    let rafId = 0
     let offset = 0
-    let lastTime: number | null = null
+    let lastTime = 0
     const dir = direction === 'left' ? 1 : -1
-    const pxPerSecond = Math.max(10, speed)
+    const pxPerSecond = Math.max(10, speed) * 2
 
-    const step = (timestamp: number) => {
-      if (lastTime == null) {
-        lastTime = timestamp
+    const tick = (now: number) => {
+      const totalWidth = el.scrollWidth
+      if (!totalWidth) {
+        rafId = requestAnimationFrame(tick)
+        return
       }
-      const delta = (timestamp - lastTime) / 1000
-      lastTime = timestamp
+      const singleWidth = totalWidth / 3
+      if (lastTime > 0) {
+        const delta = (now - lastTime) / 1000
+        offset += dir * pxPerSecond * delta
+      }
+      lastTime = now
 
-      offset += dir * pxPerSecond * delta
-      offset = ((offset % singleWidth) + singleWidth) % singleWidth
+      while (offset >= singleWidth) offset -= singleWidth
+      while (offset < 0) offset += singleWidth
 
-      const translateX = -offset
-      el.style.transform = `translate3d(${translateX}px, 0, 0)`
-
-      animationFrame = requestAnimationFrame(step)
+      el.style.transform = `translate3d(${-offset}px, 0, 0)`
+      rafId = requestAnimationFrame(tick)
     }
 
-    let animationFrame = requestAnimationFrame(step)
-
-    return () => {
-      if (animationFrame) cancelAnimationFrame(animationFrame)
-    }
-  }, [logos.length, speed, gap, direction])
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [logos.length, speed, direction, effectiveGap, effectiveLogoHeight])
 
   const renderItem = (item: LogoItem, key: number) => {
     const base =
@@ -99,21 +107,14 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
 
     const content =
       'node' in item ? (
-        <span
-          className={scaleOnHover ? 'transition-transform duration-300 group-hover:scale-110' : ''}
-        >
-          {item.node}
-        </span>
+        <span>{item.node}</span>
       ) : (
         <img
           src={item.src}
           alt={item.alt ?? item.title ?? ''}
           width={item.width}
           height={item.height}
-          className={
-            'h-[var(--logo-size)] w-auto object-contain ' +
-            (scaleOnHover ? 'transition-transform duration-300 group-hover:scale-110' : '')
-          }
+          className="h-[var(--logo-size)] w-auto object-contain"
           loading="lazy"
           decoding="async"
         />
@@ -144,18 +145,18 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
     )
   }
 
-  const allLogos = [...logos, ...logos]
+  const allLogos = [...logos, ...logos, ...logos]
 
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden group ${className ?? ''}`}
+      className={`relative overflow-hidden ${className ?? ''}`}
       aria-label={ariaLabel}
       role="region"
       style={
         {
-          '--logo-size': `${logoHeight}px`,
-          '--logo-gap': `${gap / 2}px`
+          '--logo-size': `${effectiveLogoHeight}px`,
+          '--logo-gap': `${effectiveGap / 2}px`
         } as React.CSSProperties
       }
     >
@@ -189,4 +190,3 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
 }
 
 export default LogoLoop
-

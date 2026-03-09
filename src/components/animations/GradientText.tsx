@@ -23,13 +23,27 @@ export default function GradientText({
   yoyo = true
 }: GradientTextProps) {
   const [isPaused, setIsPaused] = useState(false)
+  const [prefersReduced, setPrefersReduced] = useState(false)
   const progress = useMotionValue(0)
   const elapsedRef = useRef(0)
   const lastTimeRef = useRef<number | null>(null)
 
   const animationDuration = animationSpeed * 1000
 
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setPrefersReduced(media.matches)
+    update()
+    media.addEventListener('change', update)
+    return () => media.removeEventListener('change', update)
+  }, [])
+
   useAnimationFrame((time) => {
+    if (prefersReduced) {
+      progress.set(50)
+      return
+    }
     if (isPaused) {
       lastTimeRef.current = null
       return
@@ -119,7 +133,7 @@ export default function GradientText({
         className="inline-block relative z-10 text-transparent bg-clip-text"
         style={{
           ...gradientStyle,
-          backgroundPosition,
+          backgroundPosition: prefersReduced ? '50% 50%' : (backgroundPosition as any),
           WebkitBackgroundClip: 'text'
         }}
       >

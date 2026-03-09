@@ -41,6 +41,16 @@ const SplitText: React.FC<SplitTextProps> = ({
   const animationCompletedRef = useRef(false);
   const onCompleteRef = useRef(onLetterAnimationComplete);
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setPrefersReduced(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
   useEffect(() => {
     onCompleteRef.current = onLetterAnimationComplete;
   }, [onLetterAnimationComplete]);
@@ -57,6 +67,7 @@ const SplitText: React.FC<SplitTextProps> = ({
 
   useGSAP(
     () => {
+      if (prefersReduced) return;
       if (!ref.current || !text || !fontsLoaded) return;
       if (animationCompletedRef.current) return;
       const el = ref.current as HTMLElement & {

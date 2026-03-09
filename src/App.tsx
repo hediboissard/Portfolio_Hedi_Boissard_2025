@@ -1,14 +1,7 @@
-import Navbar from './components/Navbar'
-import Home from './components/Home'
-import About from './components/About'
-import Experience from './components/Experience'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import CV from './components/CV'
-import Contact from './components/Contact'
-import BackToTop from './components/BackToTop'
-import Plasma from './components/Plasma'
-import CustomCursor from './components/CustomCursor'
+import { Navbar, CustomCursor } from '@/components/layout'
+import { Home, About, Experience, Projects, Skills, CV, Contact } from '@/components/sections'
+import { BackToTop } from '@/components/shared'
+import { Plasma } from '@/components/effects'
 
 function App() {
   return (

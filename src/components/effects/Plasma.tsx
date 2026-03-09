@@ -106,6 +106,20 @@ export const Plasma: React.FC<PlasmaProps> = ({
   useEffect(() => {
     if (!containerRef.current) return
 
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isSmallScreen =
+      typeof window !== 'undefined' ? window.innerWidth < 768 : false
+
+    if (prefersReduced || isSmallScreen) {
+      const fallbackEl = containerRef.current
+      const fallbackColor = color || '#5227ff'
+      fallbackEl.style.background = `radial-gradient(circle at 20% 0%, ${fallbackColor}33 0, transparent 55%), radial-gradient(circle at 80% 100%, ${fallbackColor}22 0, transparent 60%)`
+      return
+    }
+
     const useCustomColor = color ? 1.0 : 0.0
     const customColorRgb = color ? hexToRgb(color) : [1, 1, 1]
 
@@ -115,7 +129,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
       webgl: 2,
       alpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      dpr: Math.min(window.devicePixelRatio || 1, 1.5)
     })
     const gl = renderer.gl
     const canvas = gl.canvas as HTMLCanvasElement
@@ -212,4 +226,3 @@ export const Plasma: React.FC<PlasmaProps> = ({
 }
 
 export default Plasma
-
