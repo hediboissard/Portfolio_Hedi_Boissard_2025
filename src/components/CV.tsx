@@ -14,6 +14,8 @@ export default function CV() {
   const { t } = useTranslation()
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([])
 
+  const cvHref = `${import.meta.env.BASE_URL}assets/CV_Hedi_Boissard.pdf`
+
   const triggerConfetti = () => {
     const pieces: ConfettiPiece[] = Array.from({ length: 26 }).map((_, index) => {
       const angle = Math.random() * Math.PI * 2
@@ -49,7 +51,7 @@ export default function CV() {
             />
           ))}
           <a
-            href="/assets/CV_Hedi_Boissard.pdf"
+            href={cvHref}
             download
             onClick={triggerConfetti}
             className="inline-flex items-center gap-2 px-8 py-3.5 text-base md:text-lg font-semibold border border-[var(--fg)]/25 rounded-full hover:border-[var(--accent)]/60 hover:text-[var(--accent)] bg-black/40 backdrop-blur-sm shadow-[0_18px_35px_rgba(15,23,42,0.75)] transition-colors"
