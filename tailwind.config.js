@@ -1,30 +1,22 @@
-/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          '"Geist Variable"',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'system-ui',
+          'sans-serif'
+        ]
+      },
       colors: {
-        primary: {
-          light: '#E8E8E8',
-          DEFAULT: '#E8E8E8',
-          dark: '#0e0c12'
-        },
-        secondary: {
-          light: '#FFFFFF',
-          DEFAULT: '#FFFFFF',
-          dark: '#1E293B',
-        },
-        accent: {
-          light: '#3399BB',
-          DEFAULT: '#3399BB',
-          dark: '#007198'
-        },
+        accent: { DEFAULT: '#007198', light: '#3399bb' },
+        muted: 'var(--muted)'
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }
