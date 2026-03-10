@@ -164,17 +164,19 @@ export default function About() {
                         ref={index === interactions.length - 1 ? answerRef : null}
                         className="mr-10 flex flex-col"
                       >
-                        <p className="bg-zinc-800 rounded-[30px] px-4 py-3 text-xs leading-relaxed text-white/90 max-w-[85%]">
-                          {interaction.status === 'typing' ? (
-                            <span className="inline-flex items-center gap-1">
+                        {interaction.status === 'typing' ? (
+                          <p className="text-xs leading-relaxed text-white/90">
+                            <span className="inline-flex items-center gap-1 bg-zinc-800 rounded-[30px] px-3 py-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-bounce [animation-delay:0ms]" />
                               <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-bounce [animation-delay:150ms]" />
                               <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-bounce [animation-delay:300ms]" />
                             </span>
-                          ) : (
-                            t(CHAT_ITEMS[interaction.questionIndex].a)
-                          )}
-                        </p>
+                          </p>
+                        ) : (
+                          <p className="bg-zinc-800 rounded-[30px] px-4 py-3 text-xs leading-relaxed text-white/90 max-w-[85%]">
+                            {t(CHAT_ITEMS[interaction.questionIndex].a)}
+                          </p>
+                        )}
                       </div>
                     </div>
                   ))}
