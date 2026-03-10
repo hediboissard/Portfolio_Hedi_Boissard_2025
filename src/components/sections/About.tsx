@@ -250,8 +250,8 @@ export default function About() {
                       key={`${index}-${i18n.language}`}
                       as="p"
                       text={paragraph}
-                      typingSpeed={20}
-                      pauseDuration={2000}
+                      typingSpeed={12}
+                      pauseDuration={1200}
                       deletingSpeed={13}
                       loop={false}
                       showCursor

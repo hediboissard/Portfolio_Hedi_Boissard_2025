@@ -28,7 +28,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="scroll-mt-24 md:scroll-mt-32 py-20 md:py-24 px-4 md:px-10"
+      className="scroll-mt-24 md:scroll-mt-32 py-2 md:py-4 px-4 md:px-10"
     >
       <div className="max-w-5xl mx-auto">
         <h2 className="flex justify-center md:justify-start text-2xl md:text-3xl font-semibold tracking-tight text-[var(--fg)] mb-14 md:mb-20">
@@ -42,7 +42,7 @@ export default function Skills() {
           />
         </h2>
 
-        <div className="relative h-28 md:h-52">
+        <div className="relative h-28 md:h-52 flex items-center">
           <LogoLoop
             logos={LOGOS}
             speed={100}
@@ -51,8 +51,7 @@ export default function Skills() {
             logoHeightMobile={40}
             gap={78}
             gapMobile={32}
-            fadeOut
-            fadeOutColor="var(--bg)"
+            fadeOut={false}
             ariaLabel="Technologies que j'utilise"
           />
         </div>

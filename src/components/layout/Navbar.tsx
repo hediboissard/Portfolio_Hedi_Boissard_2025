@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-const MENU_IDS = ['home', 'about', 'experience', 'projects', 'skills', 'contact'] as const
+const MENU_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'] as const
 
 export default function Navbar() {
   const { t, i18n } = useTranslation()

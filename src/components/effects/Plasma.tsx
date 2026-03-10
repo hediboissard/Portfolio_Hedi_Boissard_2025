@@ -105,15 +105,28 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
   useEffect(() => {
     if (!containerRef.current) return
+    const hasWindow = typeof window !== 'undefined'
 
     const prefersReduced =
-      typeof window !== 'undefined' &&
+      hasWindow &&
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const isSmallScreen =
-      typeof window !== 'undefined' ? window.innerWidth < 768 : false
 
-    if (prefersReduced || isSmallScreen) {
+    const isSmallScreen = hasWindow ? window.innerWidth < 768 : false
+
+    // Heuristique pour détecter les téléphones récents / puissants
+    let isHighEndMobile = false
+    if (isSmallScreen && typeof navigator !== 'undefined') {
+      const nav = navigator as Navigator & { deviceMemory?: number }
+      const deviceMemory = nav.deviceMemory ?? 0
+      const cores = navigator.hardwareConcurrency ?? 0
+      // Assez large: 4 Go de RAM ou 6 cœurs logiques et +
+      isHighEndMobile = deviceMemory >= 4 || cores >= 6
+    }
+
+    // Sur mobile peu puissant ou si l'utilisateur préfère réduire les animations,
+    // on bascule sur un fond statique (pas de WebGL).
+    if (prefersReduced || (isSmallScreen && !isHighEndMobile)) {
       const fallbackEl = containerRef.current
       const fallbackColor = color || '#5227ff'
       fallbackEl.style.background = `radial-gradient(circle at 20% 0%, ${fallbackColor}33 0, transparent 55%), radial-gradient(circle at 80% 100%, ${fallbackColor}22 0, transparent 60%)`
@@ -129,7 +142,10 @@ export const Plasma: React.FC<PlasmaProps> = ({
       webgl: 2,
       alpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 1.5)
+      // Qualité plus basse sur mobile pour préserver les performances
+      dpr: hasWindow
+        ? Math.min(window.devicePixelRatio || 1, isSmallScreen ? 1 : 1.5)
+        : 1
     })
     const gl = renderer.gl
     const canvas = gl.canvas as HTMLCanvasElement
@@ -153,14 +169,14 @@ export const Plasma: React.FC<PlasmaProps> = ({
         uScale: { value: scale },
         uOpacity: { value: opacity },
         uMouse: { value: new Float32Array([0, 0]) },
-        uMouseInteractive: { value: mouseInteractive ? 1.0 : 0.0 }
+        uMouseInteractive: { value: mouseInteractive && !isSmallScreen ? 1.0 : 0.0 }
       }
     })
 
     const mesh = new Mesh(gl, { geometry, program })
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!mouseInteractive || !containerRef.current) return
+      if (!mouseInteractive || isSmallScreen || !containerRef.current) return
       const rect = containerRef.current.getBoundingClientRect()
       mousePos.current.x = e.clientX - rect.left
       mousePos.current.y = e.clientY - rect.top
@@ -169,7 +185,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
       mouseUniform[1] = mousePos.current.y
     }
 
-    if (mouseInteractive) {
+    if (mouseInteractive && !isSmallScreen) {
       containerRef.current.addEventListener('mousemove', handleMouseMove)
     }
 
@@ -212,7 +228,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
-      if (mouseInteractive && containerRef.current) {
+      if (mouseInteractive && !isSmallScreen && containerRef.current) {
         containerRef.current.removeEventListener('mousemove', handleMouseMove)
       }
       try {
