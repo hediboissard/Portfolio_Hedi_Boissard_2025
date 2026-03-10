@@ -114,7 +114,13 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
           alt={item.alt ?? item.title ?? ''}
           width={item.width}
           height={item.height}
-          className={`h-[var(--logo-size)] w-auto object-contain ${item.src.includes('php.svg') ? 'brightness-0 invert' : ''}`}
+          className={`h-[var(--logo-size)] w-auto object-contain ${
+            item.src.includes('php.svg')
+              ? 'brightness-0 invert'
+              : item.src.includes('nextjs.svg')
+                ? 'scale-[1.15]'
+                : ''
+          }`}
           loading="lazy"
           decoding="async"
         />

@@ -6,12 +6,12 @@ type Position = {
 }
 
 export default function CustomCursor() {
-  const [pos, setPos] = useState<Position>({ x: -100, y: -100 })
   const [visible, setVisible] = useState(false)
   const [enabled, setEnabled] = useState(false)
   const cursorRef = useRef<HTMLDivElement | null>(null)
   const frameRef = useRef<number | null>(null)
   const targetPos = useRef<Position>({ x: -100, y: -100 })
+  const currentPos = useRef<Position>({ x: -100, y: -100 })
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -32,22 +32,26 @@ export default function CustomCursor() {
 
     const handleMove = (e: MouseEvent) => {
       setVisible(true)
-      // Stocke la position cible sans re-render à chaque event
       targetPos.current = { x: e.clientX, y: e.clientY }
+
       // Démarre une boucle d'animation si elle n'existe pas
       if (frameRef.current == null) {
         const animate = () => {
           frameRef.current = requestAnimationFrame(animate)
-          // Lissage léger pour éviter les à-coups mais garder une souris réactive
-          const current = pos
-          const nextX = current.x + (targetPos.current.x - current.x) * 0.4
-          const nextY = current.y + (targetPos.current.y - current.y) * 0.4
-          const roundedX = Math.round(nextX)
-          const roundedY = Math.round(nextY)
+          const { x: cx, y: cy } = currentPos.current
+          const { x: tx, y: ty } = targetPos.current
 
-          // Met à jour le state uniquement si la position a changé de façon visible
-          if (roundedX !== current.x || roundedY !== current.y) {
-            setPos({ x: roundedX, y: roundedY })
+          // Interpolation légère pour un suivi fluide
+          const nextX = cx + (tx - cx) * 0.45
+          const nextY = cy + (ty - cy) * 0.45
+
+          currentPos.current = { x: nextX, y: nextY }
+
+          if (cursorRef.current) {
+            const size = 20
+            cursorRef.current.style.transform = `translate3d(${nextX - size / 2}px, ${
+              nextY - size / 2
+            }px, 0)`
           }
         }
         frameRef.current = requestAnimationFrame(animate)
@@ -57,6 +61,14 @@ export default function CustomCursor() {
     const handleLeave = () => {
       setVisible(false)
       targetPos.current = { x: -100, y: -100 }
+      currentPos.current = { x: -100, y: -100 }
+
+      if (cursorRef.current) {
+        const size = 20
+        cursorRef.current.style.transform = `translate3d(${-100 - size / 2}px, ${
+          -100 - size / 2
+        }px, 0)`
+      }
     }
 
     window.addEventListener('mousemove', handleMove)
@@ -70,7 +82,7 @@ export default function CustomCursor() {
         frameRef.current = null
       }
     }
-  }, [enabled, pos])
+  }, [enabled])
 
   if (!enabled) return null
 
@@ -85,7 +97,7 @@ export default function CustomCursor() {
       style={{
         width: size,
         height: size,
-        transform: `translate3d(${pos.x - size / 2}px, ${pos.y - size / 2}px, 0)`
+        transform: `translate3d(${-100 - size / 2}px, ${-100 - size / 2}px, 0)`
       }}
     />
   )
