@@ -39,15 +39,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-@media (pointer: fine) {
-  body {
-    cursor: none;
-  }
-
-  * {
-    cursor: none !important;
-  }
-}
+/* Ancien mode curseur personnalisé supprimé : on réactive le curseur natif */
 
 @keyframes logo-loop {
   0% {

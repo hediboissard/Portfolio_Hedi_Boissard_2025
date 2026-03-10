@@ -1,4 +1,4 @@
-import { Navbar, CustomCursor } from '@/components/layout'
+import { Navbar } from '@/components/layout'
 import { Home, About, Experience, Projects, Skills, CV, Contact } from '@/components/sections'
 import { BackToTop } from '@/components/shared'
 import { Plasma } from '@/components/effects'
@@ -19,7 +19,6 @@ function App() {
       <div className="fixed inset-0 z-[1] bg-[var(--bg)]/55 pointer-events-none" aria-hidden />
 
       <div className="relative z-10">
-        <CustomCursor />
         <Navbar />
         <main>
           <Home />
