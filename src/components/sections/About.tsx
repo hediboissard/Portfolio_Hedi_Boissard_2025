@@ -104,7 +104,6 @@ export default function About() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start md:items-stretch">
-          {/* Left column: chat "phone" */}
           <div className="order-2 md:order-1 flex flex-col items-center gap-6">
             <div className="w-full max-w-[320px]">
               <div className="rounded-[40px] bg-black text-white row-span-4 overflow-hidden flex flex-col relative h-[70vh] md:h-[520px] max-h-[680px]">
