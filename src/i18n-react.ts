@@ -4,8 +4,8 @@ import { fr, en } from './locales/messages'
 
 i18n.use(initReactI18next).init({
   resources: { fr: { translation: fr }, en: { translation: en } },
-  lng: typeof window !== 'undefined' ? localStorage.getItem('locale') || 'fr' : 'fr',
-  fallbackLng: 'en',
+  lng: 'fr',
+  fallbackLng: 'fr',
   interpolation: { escapeValue: false }
 })
 

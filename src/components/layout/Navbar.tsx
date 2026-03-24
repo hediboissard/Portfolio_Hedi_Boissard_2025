@@ -13,14 +13,11 @@ export default function Navbar() {
   const base = import.meta.env.BASE_URL || '/'
   const frFlag = `${base}assets/flags/fr.svg`
   const ukFlag = `${base}assets/flags/uk.svg`
-  const isFr = i18n.language === 'fr'
-  const currentFlag = isFr ? frFlag : ukFlag
-  const currentAlt = isFr ? 'Français' : 'English'
+  const lang = i18n.language.startsWith('fr') ? 'fr' : 'en'
 
-  const toggleLang = () => {
-    const next = i18n.language === 'fr' ? 'en' : 'fr'
-    i18n.changeLanguage(next)
-    localStorage.setItem('locale', next)
+  const setLang = (next: 'fr' | 'en') => {
+    if (lang === next) return
+    void i18n.changeLanguage(next)
   }
 
   const scrollTo = (id: string) => {
@@ -108,17 +105,32 @@ export default function Navbar() {
               </button>
             )
           })}
-          <div className="flex items-center pl-6 ml-2 border-l border-[var(--fg)]/10">
+          <div className="flex items-center gap-1 pl-6 ml-2 border-l border-[var(--fg)]/10">
             <button
-              onClick={toggleLang}
-              className="flex items-center justify-center w-8 h-8 rounded-full hover:opacity-90 transition"
-              aria-label={isFr ? 'Passer le site en anglais' : 'Switch site to French'}
+              type="button"
+              onClick={() => setLang('fr')}
+              className={`flex items-center justify-center w-8 h-8 rounded-full transition ring-offset-2 ring-offset-[var(--bg)] ${
+                lang === 'fr'
+                  ? 'ring-2 ring-[var(--accent)] opacity-100'
+                  : 'opacity-60 hover:opacity-100'
+              }`}
+              aria-label="Afficher le site en français"
+              aria-pressed={lang === 'fr'}
             >
-              <img
-                src={currentFlag}
-                alt={currentAlt}
-                className="w-5 h-5 object-contain"
-              />
+              <img src={frFlag} alt="" className="w-5 h-5 object-contain" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang('en')}
+              className={`flex items-center justify-center w-8 h-8 rounded-full transition ring-offset-2 ring-offset-[var(--bg)] ${
+                lang === 'en'
+                  ? 'ring-2 ring-[var(--accent)] opacity-100'
+                  : 'opacity-60 hover:opacity-100'
+              }`}
+              aria-label="Show site in English"
+              aria-pressed={lang === 'en'}
+            >
+              <img src={ukFlag} alt="" className="w-5 h-5 object-contain" />
             </button>
           </div>
         </div>
@@ -145,18 +157,30 @@ export default function Navbar() {
               {t(`nav.${id}`)}
             </button>
           ))}
-          <div className="pt-3 mt-2 border-t border-[var(--fg)]/10">
+          <div className="pt-3 mt-2 border-t border-[var(--fg)]/10 flex items-center gap-3">
             <button
-              onClick={toggleLang}
-              className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--fg)]"
-              aria-label={isFr ? 'Passer le site en anglais' : 'Switch site to French'}
+              type="button"
+              onClick={() => setLang('fr')}
+              className={`inline-flex items-center gap-2 text-sm transition ${
+                lang === 'fr' ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--fg)]'
+              }`}
+              aria-label="Afficher le site en français"
+              aria-pressed={lang === 'fr'}
             >
-              <img
-                src={currentFlag}
-                alt={currentAlt}
-                className="w-5 h-5 object-contain"
-              />
-              <span>{currentAlt}</span>
+              <img src={frFlag} alt="" className="w-5 h-5 object-contain" />
+              <span>Français</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang('en')}
+              className={`inline-flex items-center gap-2 text-sm transition ${
+                lang === 'en' ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--fg)]'
+              }`}
+              aria-label="Show site in English"
+              aria-pressed={lang === 'en'}
+            >
+              <img src={ukFlag} alt="" className="w-5 h-5 object-contain" />
+              <span>English</span>
             </button>
           </div>
         </div>
