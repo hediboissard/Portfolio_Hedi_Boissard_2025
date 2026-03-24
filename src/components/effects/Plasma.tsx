@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 import { Renderer, Program, Mesh, Triangle } from 'ogl'
 
 interface PlasmaProps {
@@ -8,6 +8,15 @@ interface PlasmaProps {
   scale?: number
   opacity?: number
   mouseInteractive?: boolean
+}
+
+/** Detect low-end desktop devices (not just mobile) */
+const isLowEndDevice = (): boolean => {
+  if (typeof navigator === 'undefined') return false
+  const nav = navigator as Navigator & { deviceMemory?: number }
+  const mem = nav.deviceMemory ?? 8
+  const cores = navigator.hardwareConcurrency ?? 8
+  return mem <= 4 || cores <= 4
 }
 
 const hexToRgb = (hex: string): [number, number, number] => {
@@ -55,7 +64,7 @@ void mainImage(out vec4 o, vec2 C) {
   float i, d, z, T = iTime * uSpeed * uDirection;
   vec3 O, p, S;
 
-  for (vec2 r = iResolution.xy, Q; ++i < 60.; O += o.w/d*o.xyz) {
+  for (vec2 r = iResolution.xy, Q; ++i < 30.; O += o.w/d*o.xyz) {
     p = z*normalize(vec3(C-.5*r,r.y)); 
     p.z -= 4.; 
     S = p;
@@ -102,6 +111,14 @@ export const Plasma: React.FC<PlasmaProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mousePos = useRef({ x: 0, y: 0 })
+  const cachedRect = useRef({ left: 0, top: 0 })
+  const isVisibleRef = useRef(true)
+  const fellBackRef = useRef(false)
+
+  const applyFallback = useCallback((el: HTMLElement, fallbackColor: string) => {
+    fellBackRef.current = true
+    el.style.background = `radial-gradient(circle at 20% 0%, ${fallbackColor}33 0, transparent 55%), radial-gradient(circle at 80% 100%, ${fallbackColor}22 0, transparent 60%)`
+  }, [])
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -113,6 +130,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const isSmallScreen = hasWindow ? window.innerWidth < 768 : false
+    const lowEnd = isLowEndDevice()
 
     // Heuristique pour détecter les téléphones récents / puissants
     let isHighEndMobile = false
@@ -120,16 +138,12 @@ export const Plasma: React.FC<PlasmaProps> = ({
       const nav = navigator as Navigator & { deviceMemory?: number }
       const deviceMemory = nav.deviceMemory ?? 0
       const cores = navigator.hardwareConcurrency ?? 0
-      // Assez large: 4 Go de RAM ou 6 cœurs logiques et +
       isHighEndMobile = deviceMemory >= 4 || cores >= 6
     }
 
-    // Sur mobile peu puissant ou si l'utilisateur préfère réduire les animations,
-    // on bascule sur un fond statique (pas de WebGL).
+    // Fallback statique si reduced-motion ou mobile faible
     if (prefersReduced || (isSmallScreen && !isHighEndMobile)) {
-      const fallbackEl = containerRef.current
-      const fallbackColor = color || '#5227ff'
-      fallbackEl.style.background = `radial-gradient(circle at 20% 0%, ${fallbackColor}33 0, transparent 55%), radial-gradient(circle at 80% 100%, ${fallbackColor}22 0, transparent 60%)`
+      applyFallback(containerRef.current, color || '#5227ff')
       return
     }
 
@@ -138,13 +152,15 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
     const directionMultiplier = direction === 'reverse' ? -1.0 : 1.0
 
+    // DPR plus bas sur les appareils faibles
+    const maxDpr = lowEnd ? 0.75 : isSmallScreen ? 1 : 1.5
+
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
       antialias: false,
-      // Qualité plus basse sur mobile pour préserver les performances
       dpr: hasWindow
-        ? Math.min(window.devicePixelRatio || 1, isSmallScreen ? 1 : 1.5)
+        ? Math.min(window.devicePixelRatio || 1, maxDpr)
         : 1
     })
     const gl = renderer.gl
@@ -175,11 +191,17 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
     const mesh = new Mesh(gl, { geometry, program })
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!mouseInteractive || isSmallScreen || !containerRef.current) return
+    // Cache rect on resize instead of every mousemove
+    const updateCachedRect = () => {
+      if (!containerRef.current) return
       const rect = containerRef.current.getBoundingClientRect()
-      mousePos.current.x = e.clientX - rect.left
-      mousePos.current.y = e.clientY - rect.top
+      cachedRect.current = { left: rect.left, top: rect.top }
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!mouseInteractive || isSmallScreen) return
+      mousePos.current.x = e.clientX - cachedRect.current.left
+      mousePos.current.y = e.clientY - cachedRect.current.top
       const mouseUniform = program.uniforms.uMouse.value as Float32Array
       mouseUniform[0] = mousePos.current.x
       mouseUniform[1] = mousePos.current.y
@@ -198,15 +220,62 @@ export const Plasma: React.FC<PlasmaProps> = ({
       const res = program.uniforms.iResolution.value as Float32Array
       res[0] = gl.drawingBufferWidth
       res[1] = gl.drawingBufferHeight
+      updateCachedRect()
     }
 
     const ro = new ResizeObserver(setSize)
     ro.observe(containerRef.current)
     setSize()
 
+    // IntersectionObserver: pause rendering when off-screen
+    const visObserver = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting },
+      { threshold: 0 }
+    )
+    visObserver.observe(containerRef.current)
+
+    // FPS monitoring: fallback to CSS if sustained low FPS
     let raf = 0
     const t0 = performance.now()
+    let frameCount = 0
+    let fpsCheckStart = performance.now()
+    let lowFpsStreak = 0
+    // On low-end devices, skip every other frame
+    const frameSkip = lowEnd ? 2 : 1
+    let frameIndex = 0
+
     const loop = (t: number) => {
+      raf = requestAnimationFrame(loop)
+
+      // Skip frames when not visible
+      if (!isVisibleRef.current) return
+
+      // Frame skipping for low-end
+      frameIndex++
+      if (frameIndex % frameSkip !== 0) return
+
+      // FPS monitoring (check every 60 frames)
+      frameCount++
+      if (frameCount >= 60) {
+        const elapsed = t - fpsCheckStart
+        const fps = (frameCount * 1000) / elapsed
+        frameCount = 0
+        fpsCheckStart = t
+
+        if (fps < 24) {
+          lowFpsStreak++
+          if (lowFpsStreak >= 2 && containerRef.current) {
+            // Sustained low FPS — fall back to CSS gradient
+            cancelAnimationFrame(raf)
+            try { containerRef.current.removeChild(canvas) } catch {}
+            applyFallback(containerRef.current, color || '#5227ff')
+            return
+          }
+        } else {
+          lowFpsStreak = 0
+        }
+      }
+
       const timeValue = (t - t0) * 0.001
       if (direction === 'pingpong') {
         const pingpongDuration = 10
@@ -221,13 +290,13 @@ export const Plasma: React.FC<PlasmaProps> = ({
         ;(program.uniforms.iTime as any).value = timeValue
       }
       renderer.render({ scene: mesh })
-      raf = requestAnimationFrame(loop)
     }
     raf = requestAnimationFrame(loop)
 
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
+      visObserver.disconnect()
       if (mouseInteractive && !isSmallScreen && containerRef.current) {
         containerRef.current.removeEventListener('mousemove', handleMouseMove)
       }
@@ -236,7 +305,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
       } catch {
       }
     }
-  }, [color, speed, direction, scale, opacity, mouseInteractive])
+  }, [color, speed, direction, scale, opacity, mouseInteractive, applyFallback])
 
   return <div ref={containerRef} className="w-full h-full relative overflow-hidden" />
 }

@@ -1,37 +1,12 @@
 import { useTranslation } from 'react-i18next'
-import { useRef, useState, useEffect } from 'react'
 import { SplitText, GradientText } from '@/components/animations'
 
 export default function Home() {
   const { t } = useTranslation()
-  const sectionRef = useRef<HTMLElement>(null)
-  const [animationKey, setAnimationKey] = useState(0)
-  const leftHomeRef = useRef(false)
   const avatarSrc = `${import.meta.env.BASE_URL}assets/pp_Hedi.png`
-
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (leftHomeRef.current) {
-            setAnimationKey((k) => k + 1)
-            leftHomeRef.current = false
-          }
-        } else {
-          leftHomeRef.current = true
-        }
-      },
-      { threshold: 0.2 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
 
   return (
     <section
-      ref={sectionRef}
       id="home"
       className="scroll-mt-24 md:scroll-mt-32 min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between gap-10 md:gap-20 py-16 px-5 md:py-20 md:pt-24 md:pb-16 md:px-10 max-w-6xl mx-auto"
     >
@@ -44,7 +19,6 @@ export default function Home() {
         </p>
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-4 md:mb-5 text-white">
           <SplitText
-            key={animationKey}
             text="Hédi Boissard"
             tag="span"
             splitType="chars"
@@ -102,7 +76,7 @@ export default function Home() {
 
       <div className="hidden md:flex flex-1 justify-center md:justify-end min-w-0">
         <div className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-[var(--fg)]/10 shadow-[0_0_60px_rgba(56,189,248,0.15)] ring-4 ring-purple-500/20 flex-shrink-0">
-          <img src={avatarSrc} alt="Hédi Boissard" className="w-full h-full object-cover object-[52%_100%]" />
+          <img src={avatarSrc} alt="Hédi Boissard" loading="lazy" decoding="async" className="w-full h-full object-cover object-[52%_100%]" />
         </div>
       </div>
     </section>

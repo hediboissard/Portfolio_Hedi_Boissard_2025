@@ -91,12 +91,13 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`pointer-events-none fixed z-[60] rounded-full bg-neutral-400/50 backdrop-blur-sm transition-opacity duration-100 ${
+      className={`pointer-events-none fixed z-[60] rounded-full bg-neutral-400/50 transition-opacity duration-100 ${
         visible ? 'opacity-100' : 'opacity-0'
       }`}
       style={{
         width: size,
         height: size,
+        willChange: 'transform',
         transform: `translate3d(${-100 - size / 2}px, ${-100 - size / 2}px, 0)`
       }}
     />

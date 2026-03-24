@@ -41,6 +41,21 @@ body {
 
 /* Ancien mode curseur personnalisé supprimé : on réactive le curseur natif */
 
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes gradient-y {
+  0% { background-position: 50% 0%; }
+  100% { background-position: 50% 100%; }
+}
+
 @keyframes logo-loop {
   0% {
     transform: translate3d(0, 0, 0);
@@ -73,17 +88,6 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
-}
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(0.4em);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes confetti-burst {
@@ -126,5 +130,9 @@ body {
 }
 
 .timeline-pulse {
+  animation: timeline-pulse 1.6s ease-out 1;
+}
+
+article:hover .timeline-pulse {
   animation: timeline-pulse 1.6s ease-out infinite;
 }

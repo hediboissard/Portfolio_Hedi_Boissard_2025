@@ -1,5 +1,4 @@
-import { useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
-import { motion, useMotionValue, useAnimationFrame, useTransform } from 'motion/react'
+import { useState, useCallback, useEffect, useMemo, type ReactNode } from 'react'
 
 interface GradientTextProps {
   children: ReactNode
@@ -19,16 +18,10 @@ export default function GradientText({
   animationSpeed = 8,
   showBorder = false,
   direction = 'horizontal',
-  pauseOnHover = false,
-  yoyo = true
+  pauseOnHover = false
 }: GradientTextProps) {
   const [isPaused, setIsPaused] = useState(false)
   const [prefersReduced, setPrefersReduced] = useState(false)
-  const progress = useMotionValue(0)
-  const elapsedRef = useRef(0)
-  const lastTimeRef = useRef<number | null>(null)
-
-  const animationDuration = animationSpeed * 1000
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return
@@ -38,54 +31,6 @@ export default function GradientText({
     media.addEventListener('change', update)
     return () => media.removeEventListener('change', update)
   }, [])
-
-  useAnimationFrame((time) => {
-    if (prefersReduced) {
-      progress.set(50)
-      return
-    }
-    if (isPaused) {
-      lastTimeRef.current = null
-      return
-    }
-
-    if (lastTimeRef.current === null) {
-      lastTimeRef.current = time
-      return
-    }
-
-    const deltaTime = time - lastTimeRef.current
-    lastTimeRef.current = time
-    elapsedRef.current += deltaTime
-
-    if (yoyo) {
-      const fullCycle = animationDuration * 2
-      const cycleTime = elapsedRef.current % fullCycle
-
-      if (cycleTime < animationDuration) {
-        progress.set((cycleTime / animationDuration) * 100)
-      } else {
-        progress.set(100 - ((cycleTime - animationDuration) / animationDuration) * 100)
-      }
-    } else {
-      progress.set((elapsedRef.current / animationDuration) * 100)
-    }
-  })
-
-  useEffect(() => {
-    elapsedRef.current = 0
-    progress.set(0)
-  }, [animationSpeed, yoyo, progress])
-
-  const backgroundPosition = useTransform(progress, (p) => {
-    if (direction === 'horizontal') {
-      return `${p}% 50%`
-    }
-    if (direction === 'vertical') {
-      return `50% ${p}%`
-    }
-    return `${p}% 50%`
-  })
 
   const handleMouseEnter = useCallback(() => {
     if (pauseOnHover) setIsPaused(true)
@@ -99,23 +44,30 @@ export default function GradientText({
     direction === 'horizontal' ? 'to right' : direction === 'vertical' ? 'to bottom' : 'to bottom right'
   const gradientColors = [...colors, colors[0]].join(', ')
 
-  const gradientStyle = {
+  const bgSize =
+    direction === 'horizontal' ? '300% 100%' : direction === 'vertical' ? '100% 300%' : '300% 300%'
+
+  const animName = direction === 'horizontal' ? 'gradient-x' : direction === 'vertical' ? 'gradient-y' : 'gradient-x'
+  const animDuration = `${animationSpeed}s`
+
+  const gradientStyle = useMemo(() => ({
     backgroundImage: `linear-gradient(${gradientAngle}, ${gradientColors})`,
-    backgroundSize:
-      direction === 'horizontal' ? '300% 100%' : direction === 'vertical' ? '100% 300%' : '300% 300%',
-    backgroundRepeat: 'repeat'
-  }
+    backgroundSize: bgSize,
+    backgroundRepeat: 'repeat' as const,
+    animation: prefersReduced ? 'none' : `${animName} ${animDuration} ease-in-out infinite alternate`,
+    animationPlayState: isPaused ? 'paused' as const : 'running' as const
+  }), [gradientAngle, gradientColors, bgSize, prefersReduced, animName, animDuration, isPaused])
 
   return (
-    <motion.div
-      className={`relative flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-medium backdrop-blur transition-shadow duration-500 overflow-hidden cursor-default ${showBorder ? 'py-1 px-2' : ''} ${className}`}
+    <div
+      className={`relative flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-medium transition-shadow duration-500 overflow-hidden cursor-default ${showBorder ? 'py-1 px-2' : ''} ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {showBorder && (
-        <motion.div
+        <div
           className="absolute inset-0 z-0 pointer-events-none rounded-[1.25rem]"
-          style={{ ...gradientStyle, backgroundPosition }}
+          style={gradientStyle}
         >
           <div
             className="absolute bg-black rounded-[1.25rem] z-[-1]"
@@ -127,18 +79,17 @@ export default function GradientText({
               transform: 'translate(-50%, -50%)'
             }}
           />
-        </motion.div>
+        </div>
       )}
-      <motion.div
+      <div
         className="inline-block relative z-10 text-transparent bg-clip-text"
         style={{
           ...gradientStyle,
-          backgroundPosition: prefersReduced ? '50% 50%' : (backgroundPosition as any),
           WebkitBackgroundClip: 'text'
         }}
       >
         {children}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }

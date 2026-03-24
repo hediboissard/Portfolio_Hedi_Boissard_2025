@@ -61,7 +61,8 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
 
   useEffect(() => {
     const el = trackRef.current
-    if (!el) return
+    const container = containerRef.current
+    if (!el || !container) return
 
     const prefersReducedMotion =
       typeof window !== 'undefined' &&
@@ -74,31 +75,51 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
     let rafId = 0
     let offset = 0
     let lastTime = 0
+    let isVisible = true
+    let cachedSingleWidth = 0
     const dir = direction === 'left' ? 1 : -1
     const pxPerSecond = Math.max(15, speed * 1.5)
 
+    // Pause animation when off-screen
+    const visObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+        if (isVisible) {
+          lastTime = 0 // reset delta to avoid jump
+        }
+      },
+      { threshold: 0 }
+    )
+    visObserver.observe(container)
+
     const tick = (now: number) => {
-      const totalWidth = el.scrollWidth
-      if (!totalWidth) {
-        rafId = requestAnimationFrame(tick)
-        return
+      rafId = requestAnimationFrame(tick)
+
+      if (!isVisible) return
+
+      if (!cachedSingleWidth) {
+        const totalWidth = el.scrollWidth
+        if (!totalWidth) return
+        cachedSingleWidth = totalWidth / 3
       }
-      const singleWidth = totalWidth / 3
+
       if (lastTime > 0) {
         const delta = (now - lastTime) / 1000
         offset += dir * pxPerSecond * delta
       }
       lastTime = now
 
-      while (offset >= singleWidth) offset -= singleWidth
-      while (offset < 0) offset += singleWidth
+      while (offset >= cachedSingleWidth) offset -= cachedSingleWidth
+      while (offset < 0) offset += cachedSingleWidth
 
       el.style.transform = `translate3d(${-offset}px, 0, 0)`
-      rafId = requestAnimationFrame(tick)
     }
 
     rafId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafId)
+    return () => {
+      cancelAnimationFrame(rafId)
+      visObserver.disconnect()
+    }
   }, [logos.length, speed, direction, effectiveGap, effectiveLogoHeight])
 
   const renderItem = (item: LogoItem, key: number) => {

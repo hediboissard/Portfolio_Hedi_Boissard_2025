@@ -43,20 +43,26 @@ export default function Navbar() {
   }
 
   useEffect(() => {
+    let ticking = false
     const onScroll = () => {
-      setScrolled(window.scrollY > 16)
-      for (const id of MENU_IDS) {
-        const el = document.getElementById(id)
-        if (el) {
-          const { top } = el.getBoundingClientRect()
-          if (top >= -80 && top <= 120) {
-            setActive(id)
-            break
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 16)
+        for (const id of MENU_IDS) {
+          const el = document.getElementById(id)
+          if (el) {
+            const { top } = el.getBoundingClientRect()
+            if (top >= -80 && top <= 120) {
+              setActive(id)
+              break
+            }
           }
         }
-      }
+        ticking = false
+      })
     }
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 

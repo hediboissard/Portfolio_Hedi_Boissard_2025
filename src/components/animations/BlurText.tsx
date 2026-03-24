@@ -105,6 +105,8 @@ const BlurText: React.FC<BlurTextProps> = ({
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
+  const animateKeyframes = useMemo(() => buildKeyframes(fromSnapshot, toSnapshots), [fromSnapshot, toSnapshots]);
+
   if (prefersReduced) {
     return (
       <Component className={className}>
@@ -116,7 +118,6 @@ const BlurText: React.FC<BlurTextProps> = ({
   return (
     <Component ref={ref as React.Ref<HTMLParagraphElement & HTMLSpanElement>} className={`blur-text ${className} flex flex-wrap`}>
       {elements.map((segment, index) => {
-        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
         const spanTransition: Transition = {
           duration: totalDuration,
           times,
@@ -133,7 +134,6 @@ const BlurText: React.FC<BlurTextProps> = ({
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
             style={{
               display: 'inline-block',
-              willChange: 'transform, filter, opacity',
               marginRight: animateBy === 'words' ? undefined : '0.02em'
             }}
           >

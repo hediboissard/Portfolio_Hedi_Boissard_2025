@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(config|json\\)$\")",
+      "Bash(grep -r Lenis /c/Users/hbois/OneDrive/Bureau/Portfolio_Hedi/src --include=*.tsx --include=*.ts)",
+      "Bash(npx vite:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}
