@@ -95,6 +95,10 @@ export default function Projects() {
 
         <div
           className="w-full flex items-center justify-center gap-3 md:gap-8"
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft') handlePrev()
+            if (e.key === 'ArrowRight') handleNext()
+          }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -156,7 +160,7 @@ export default function Projects() {
                     <span className="font-medium">GitHub</span>
                   </div>
                   <span className="text-[11px] md:text-xs text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
-                    Ouvrir le dépôt ↗
+                    {t('projects.open_repo')} ↗
                   </span>
                 </div>
               </a>

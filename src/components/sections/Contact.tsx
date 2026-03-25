@@ -100,7 +100,7 @@ export default function Contact() {
               {...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
               className="flex flex-col items-center gap-2 text-white transition-colors"
             >
-              <div className="w-12 h-12 rounded-full bg-white/10 border border-white flex items-center justify-center transition-colors">
+              <div className="w-12 h-12 rounded-full bg-white/10 border border-white/30 hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 flex items-center justify-center transition-all duration-300">
                 <img src={`${import.meta.env.BASE_URL}${l.img.replace(/^\//, '')}`} alt="" className="w-5 h-5 invert brightness-0 opacity-100" />
               </div>
               <span className="text-xs text-white">{l.name}</span>
@@ -121,7 +121,7 @@ export default function Contact() {
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                 onBlur={() => validate('name')}
                 placeholder={t('contact.placeholders.name')}
-                className="w-full px-4 py-2.5 text-sm bg-[var(--fg)]/5 border border-[var(--fg)]/15 rounded-lg focus:outline-none focus:border-[var(--accent)] text-black transition-colors"
+                className="w-full px-4 py-2.5 text-sm bg-white/[0.07] border border-white/[0.12] rounded-lg focus:outline-none focus:border-[var(--accent)] text-[var(--fg)] placeholder:text-[var(--muted)]/50 transition-colors"
               />
               {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
             </div>
@@ -136,7 +136,7 @@ export default function Contact() {
                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                 onBlur={() => validate('email')}
                 placeholder={t('contact.placeholders.email')}
-                className="w-full px-4 py-2.5 text-sm bg-[var(--fg)]/5 border border-[var(--fg)]/15 rounded-lg focus:outline-none focus:border-[var(--accent)] text-black transition-colors"
+                className="w-full px-4 py-2.5 text-sm bg-white/[0.07] border border-white/[0.12] rounded-lg focus:outline-none focus:border-[var(--accent)] text-[var(--fg)] placeholder:text-[var(--muted)]/50 transition-colors"
               />
               {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
             </div>
@@ -152,7 +152,7 @@ export default function Contact() {
               onBlur={() => validate('message')}
               rows={4}
               placeholder={t('contact.placeholders.message')}
-              className="w-full px-4 py-2.5 text-sm bg-[var(--fg)]/5 border border-[var(--fg)]/15 rounded-lg focus:outline-none focus:border-[var(--accent)] resize-none text-black transition-colors"
+              className="w-full px-4 py-2.5 text-sm bg-white/[0.07] border border-white/[0.12] rounded-lg focus:outline-none focus:border-[var(--accent)] resize-none text-[var(--fg)] placeholder:text-[var(--muted)]/50 transition-colors"
             />
             {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
           </div>
@@ -162,7 +162,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 text-sm md:text-base font-semibold rounded-xl bg-gradient-to-r from-sky-500/80 to-sky-400/80 text-white shadow-[0_10px_22px_rgba(56,189,248,0.4)] hover:brightness-105 disabled:opacity-60 transition"
+              className="w-full py-3.5 text-sm md:text-base font-semibold rounded-xl bg-gradient-to-r from-sky-500/80 to-sky-400/80 text-white shadow-[0_10px_22px_rgba(56,189,248,0.3)] hover:shadow-[0_10px_28px_rgba(56,189,248,0.5)] hover:brightness-110 disabled:opacity-60 transition-all duration-300"
             >
               {loading ? t('contact.buttons.sending') : t('contact.buttons.send')}
             </button>

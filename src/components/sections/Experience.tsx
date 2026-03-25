@@ -43,7 +43,7 @@ export default function Experience() {
 
           <div className="space-y-5 md:space-y-10 pl-6 md:pl-14">
             {items.map((exp, i) => (
-              <article key={i} className="relative max-w-[280px] md:max-w-none mx-auto md:mx-0">
+              <article key={i} className="relative max-w-full md:max-w-none mx-auto md:mx-0">
                 <div className="absolute -left-5 md:-left-11 top-4 md:top-5 flex items-center justify-center">
                   <span className="timeline-pulse inline-flex h-2 w-2 md:h-3 md:w-3 rounded-full bg-[var(--accent)] shadow-[0_0_0_3px_rgba(56,189,248,0.4)] md:shadow-[0_0_0_4px_rgba(56,189,248,0.4)]" />
                 </div>

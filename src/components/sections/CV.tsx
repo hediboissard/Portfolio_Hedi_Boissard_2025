@@ -32,8 +32,9 @@ export default function CV() {
   }
 
   return (
-    <section className="px-4">
-      <div className="max-w-3xl mx-auto flex justify-center">
+    <section className="py-10 md:py-16 px-4">
+      <div className="max-w-3xl mx-auto flex flex-col items-center gap-4">
+        <p className="text-sm text-[var(--muted)] text-center">{t('cv.hint')}</p>
         <div className="relative inline-flex">
           {confetti.map((piece) => (
             <span

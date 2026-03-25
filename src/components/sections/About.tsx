@@ -222,12 +222,12 @@ export default function About() {
           </div>
 
           {/* Right column: text */}
-          <div className="hidden md:flex order-1 md:order-2 flex-col gap-4 w-full max-w-xl mx-auto md:mx-0 text-center md:text-left h-full min-h-0">
+          <div className="flex order-1 md:order-2 flex-col gap-4 w-full max-w-xl mx-auto md:mx-0 text-center md:text-left h-full min-h-0">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full flex-shrink-0">
               {TAG_KEYS.map((key) => (
                 <span
                   key={key}
-                  className="flex items-center justify-center min-h-[2.75rem] text-sm font-extrabold px-4 py-2 rounded-xl border border-[var(--accent)]/60 text-[var(--accent)] bg-[var(--accent)]/5 shadow-sm whitespace-nowrap transition-colors"
+                  className="flex items-center justify-center min-h-[2.75rem] text-xs md:text-sm font-extrabold px-3 md:px-4 py-2 rounded-xl border border-[var(--accent)]/60 text-[var(--accent)] bg-[var(--accent)]/5 shadow-sm whitespace-nowrap transition-colors"
                 >
                   {t(`about.tags.${key}`)}
                 </span>
@@ -239,7 +239,7 @@ export default function About() {
                   return (
                     <p
                       key={index}
-                      className="text-base md:text-lg font-semibold text-[var(--fg)] leading-relaxed"
+                      className="text-sm md:text-lg font-semibold text-[var(--fg)] leading-relaxed"
                     >
                       {paragraph}
                     </p>
@@ -263,7 +263,7 @@ export default function About() {
                           prev < paragraphs.length - 1 ? prev + 1 : prev
                         )
                       }
-                      className="text-base md:text-lg font-semibold text-[var(--fg)] leading-relaxed"
+                      className="text-sm md:text-lg font-semibold text-[var(--fg)] leading-relaxed"
                     />
                   )
                 }

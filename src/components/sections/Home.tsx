@@ -41,7 +41,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 mb-8 md:mb-10">
           <a
             href="#projects"
-            className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 sm:px-10 sm:py-5 text-base sm:text-lg font-medium bg-[var(--accent)] text-white rounded-full hover:opacity-90 transition-colors"
+            className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 sm:px-10 sm:py-5 text-base sm:text-lg font-medium bg-[var(--accent)] text-white rounded-full hover:brightness-110 shadow-[0_8px_25px_rgba(56,189,248,0.3)] hover:shadow-[0_8px_30px_rgba(56,189,248,0.45)] transition-all duration-300"
           >
             {t('home.cta_projects')}
           </a>

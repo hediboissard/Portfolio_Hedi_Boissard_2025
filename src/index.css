@@ -136,3 +136,31 @@ body {
 article:hover .timeline-pulse {
   animation: timeline-pulse 1.6s ease-out infinite;
 }
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.15) 20%,
+    rgba(56, 189, 248, 0.25) 50%,
+    rgba(56, 189, 248, 0.15) 80%,
+    transparent 100%
+  );
+}
+
+/* Smooth focus rings for form elements */
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+/* Footer gradient */
+.footer-gradient {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.03) 100%
+  );
+}

@@ -136,55 +136,69 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden p-2 text-[var(--fg)]"
+          className="md:hidden p-2 text-[var(--fg)] relative w-9 h-9 flex items-center justify-center"
           onClick={() => setOpen(!open)}
           aria-label="Menu"
+          aria-expanded={open}
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+          <span className={`absolute h-0.5 w-5 bg-current transition-all duration-300 ${open ? 'rotate-45' : '-translate-y-1.5'}`} />
+          <span className={`absolute h-0.5 w-5 bg-current transition-all duration-300 ${open ? 'opacity-0' : 'opacity-100'}`} />
+          <span className={`absolute h-0.5 w-5 bg-current transition-all duration-300 ${open ? '-rotate-45' : 'translate-y-1.5'}`} />
         </button>
       </nav>
 
+      {/* Mobile backdrop */}
       {open && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-neutral-900/95 backdrop-blur-sm border-b border-[var(--fg)]/10 py-4 px-4 flex flex-col gap-3">
-          {MENU_IDS.map((id) => (
-            <button
-              key={id}
-              onClick={() => scrollTo(id)}
-              className={`text-left text-sm py-2 px-2 rounded-md transition-colors ${active === id ? 'text-[var(--accent)]' : 'text-[var(--fg)]'}`}
-            >
-              {t(`nav.${id}`)}
-            </button>
-          ))}
-          <div className="pt-3 mt-2 border-t border-[var(--fg)]/10 flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setLang('fr')}
-              className={`inline-flex items-center gap-2 text-sm transition ${
-                lang === 'fr' ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--fg)]'
-              }`}
-              aria-label="Afficher le site en français"
-              aria-pressed={lang === 'fr'}
-            >
-              <img src={frFlag} alt="" className="w-5 h-5 object-contain" />
-              <span>Français</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setLang('en')}
-              className={`inline-flex items-center gap-2 text-sm transition ${
-                lang === 'en' ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--fg)]'
-              }`}
-              aria-label="Show site in English"
-              aria-pressed={lang === 'en'}
-            >
-              <img src={ukFlag} alt="" className="w-5 h-5 object-contain" />
-              <span>English</span>
-            </button>
-          </div>
-        </div>
+        <div
+          className="md:hidden fixed inset-0 top-16 bg-black/40 z-40"
+          onClick={() => setOpen(false)}
+          aria-hidden
+        />
       )}
+
+      <div
+        className={`md:hidden absolute top-16 left-0 right-0 bg-neutral-900/95 backdrop-blur-md border-b border-[var(--fg)]/10 py-4 px-4 flex flex-col gap-1 z-50 transition-all duration-300 ease-out ${
+          open
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 -translate-y-2 pointer-events-none'
+        }`}
+      >
+        {MENU_IDS.map((id) => (
+          <button
+            key={id}
+            onClick={() => scrollTo(id)}
+            className={`text-left text-sm py-2.5 px-3 rounded-lg transition-colors ${active === id ? 'text-[var(--accent)] bg-[var(--accent)]/10' : 'text-[var(--fg)] hover:bg-white/5'}`}
+          >
+            {t(`nav.${id}`)}
+          </button>
+        ))}
+        <div className="pt-3 mt-2 border-t border-[var(--fg)]/10 flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setLang('fr')}
+            className={`inline-flex items-center gap-2 text-sm transition ${
+              lang === 'fr' ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--fg)]'
+            }`}
+            aria-label="Afficher le site en français"
+            aria-pressed={lang === 'fr'}
+          >
+            <img src={frFlag} alt="" className="w-5 h-5 object-contain" />
+            <span>Français</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setLang('en')}
+            className={`inline-flex items-center gap-2 text-sm transition ${
+              lang === 'en' ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--fg)]'
+            }`}
+            aria-label="Show site in English"
+            aria-pressed={lang === 'en'}
+          >
+            <img src={ukFlag} alt="" className="w-5 h-5 object-contain" />
+            <span>English</span>
+          </button>
+        </div>
+      </div>
     </header>
   )
 }

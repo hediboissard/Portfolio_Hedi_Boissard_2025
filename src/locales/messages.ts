@@ -93,6 +93,7 @@ export const fr = {
   },
   projects: {
     title: 'Projets',
+    open_repo: 'Ouvrir le dépôt',
     items: {
       nextstack: 'Plateforme FullStack Next.js & NestJS — messagerie temps réel, IA, shadcn/ui, Zustand.',
       moodify: 'App web recommandant des musiques selon l\'humeur. API Spotify.',
@@ -102,7 +103,7 @@ export const fr = {
     }
   },
   skills: { title: 'Compétences', categories: { frontend: 'Frontend', backend: 'Backend', tools: 'Outils' } },
-  cv: { download: 'Télécharger mon CV' },
+  cv: { download: 'Télécharger mon CV', hint: 'Envie d\'en savoir plus ? Téléchargez mon CV complet.' },
   contact: {
     title: 'Contact',
     labels: { name: 'Nom', email: 'Email', message: 'Message' },
@@ -110,6 +111,11 @@ export const fr = {
     buttons: { send: 'Envoyer', sending: 'Envoi...' },
     messages: { success: 'Message envoyé !', error: 'Erreur d\'envoi.', validation_error: 'Veuillez remplir tous les champs.' },
     validation: { name_short: 'Nom trop court.', email_invalid: 'Email invalide.', message_short: 'Message trop court.' }
+  },
+  footer: {
+    made_with: 'Fait avec',
+    by: 'par Hédi Boissard',
+    rights: 'Tous droits réservés.'
   }
 }
 
@@ -189,6 +195,7 @@ export const en = {
   },
   projects: {
     title: 'Projects',
+    open_repo: 'Open repository',
     items: {
       nextstack: 'FullStack Next.js & NestJS — real-time messaging, AI, shadcn/ui, Zustand.',
       moodify: 'Web app recommending music by mood. Spotify API.',
@@ -198,7 +205,7 @@ export const en = {
     }
   },
   skills: { title: 'Skills', categories: { frontend: 'Frontend', backend: 'Backend', tools: 'Tools' } },
-  cv: { download: 'Download Resume' },
+  cv: { download: 'Download Resume', hint: 'Want to know more? Download my full resume.' },
   contact: {
     title: 'Contact',
     labels: { name: 'Name', email: 'Email', message: 'Message' },
@@ -206,5 +213,10 @@ export const en = {
     buttons: { send: 'Send', sending: 'Sending...' },
     messages: { success: 'Message sent!', error: 'Send error.', validation_error: 'Please fill all fields.' },
     validation: { name_short: 'Name too short.', email_invalid: 'Invalid email.', message_short: 'Message too short.' }
+  },
+  footer: {
+    made_with: 'Made with',
+    by: 'by Hédi Boissard',
+    rights: 'All rights reserved.'
   }
 }

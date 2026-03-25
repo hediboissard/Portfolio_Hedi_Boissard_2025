@@ -13,7 +13,7 @@ export default {
         ]
       },
       colors: {
-        accent: { DEFAULT: '#007198', light: '#3399bb' },
+        accent: { DEFAULT: '#38bdf8', light: '#7dd3fc' },
         muted: 'var(--muted)'
       }
     }

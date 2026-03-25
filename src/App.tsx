@@ -1,7 +1,11 @@
-import { Navbar } from '@/components/layout'
+import { Navbar, Footer } from '@/components/layout'
 import { Home, About, Experience, Projects, Skills, CV, Contact } from '@/components/sections'
 import { BackToTop } from '@/components/shared'
 import { Plasma } from '@/components/effects'
+
+function Divider() {
+  return <div className="section-divider max-w-4xl mx-auto" aria-hidden />
+}
 
 function App() {
   return (
@@ -22,13 +26,19 @@ function App() {
         <Navbar />
         <main>
           <Home />
+          <Divider />
           <About />
+          <Divider />
           <Skills />
+          <Divider />
           <Experience />
+          <Divider />
           <Projects />
           <CV />
+          <Divider />
           <Contact />
         </main>
+        <Footer />
         <BackToTop />
       </div>
     </div>
