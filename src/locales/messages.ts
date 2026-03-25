@@ -93,13 +93,14 @@ export const fr = {
   },
   projects: {
     title: 'Projets',
-    open_repo: 'Ouvrir le dépôt',
+    visit: 'Voir le projet',
+    labels: {
+      mijote: '⚡ Next.js — Blog communautaire',
+      taskOrbit: '💚 Vue.js — Gestion de tâches',
+    },
     items: {
-      nextstack: 'Plateforme FullStack Next.js & NestJS — messagerie temps réel, IA, shadcn/ui, Zustand.',
-      moodify: 'App web recommandant des musiques selon l\'humeur. API Spotify.',
-      fossiles: 'Site e-commerce Vue.js. Focus UX.',
-      devops: 'Pipeline CI/CD complet. Intégration continue.',
-      comptinou: 'App Android histoires pour enfants. Java/Kotlin.'
+      mijote: "Blog communautaire Next.js où les utilisateurs s'inscrivent, publient des recettes, les likent et les commentent. Authentification via NextAuth, base de données PostgreSQL hébergée sur Supabase.",
+      taskOrbit: "Gestionnaire de tâches avancé avec projets, Kanban (À faire / En cours / Terminé), priorités, deadlines et filtres. Backend Node.js / Express + MongoDB, authentification JWT."
     }
   },
   skills: { title: 'Compétences', categories: { frontend: 'Frontend', backend: 'Backend', tools: 'Outils' } },
@@ -195,13 +196,14 @@ export const en = {
   },
   projects: {
     title: 'Projects',
-    open_repo: 'Open repository',
+    visit: 'Visit project',
+    labels: {
+      mijote: '⚡ Next.js — Community Blog',
+      taskOrbit: '💚 Vue.js — Task Manager',
+    },
     items: {
-      nextstack: 'FullStack Next.js & NestJS — real-time messaging, AI, shadcn/ui, Zustand.',
-      moodify: 'Web app recommending music by mood. Spotify API.',
-      fossiles: 'Vue.js e-commerce. UX focus.',
-      devops: 'Full CI/CD pipeline. Continuous integration.',
-      comptinou: 'Android app for children stories. Java/Kotlin.'
+      mijote: 'Next.js community blog where users sign up, publish recipes, like and comment. Auth via NextAuth, PostgreSQL database hosted on Supabase.',
+      taskOrbit: 'Advanced task manager with projects, Kanban board (To do / In progress / Done), priorities, deadlines and filters. Node.js / Express backend + MongoDB, JWT authentication.'
     }
   },
   skills: { title: 'Skills', categories: { frontend: 'Frontend', backend: 'Backend', tools: 'Tools' } },

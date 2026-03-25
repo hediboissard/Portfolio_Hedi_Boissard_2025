@@ -222,7 +222,7 @@ export default function About() {
           </div>
 
           {/* Right column: text */}
-          <div className="flex order-1 md:order-2 flex-col gap-4 w-full max-w-xl mx-auto md:mx-0 text-center md:text-left h-full min-h-0">
+          <div className="hidden md:flex order-1 md:order-2 flex-col gap-4 w-full max-w-xl mx-auto md:mx-0 text-center md:text-left h-full min-h-0">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full flex-shrink-0">
               {TAG_KEYS.map((key) => (
                 <span
