@@ -91,7 +91,7 @@ export default function Navbar() {
                 onClick={() => scrollTo(id)}
                 onMouseEnter={() => setHovered(id)}
                 className={`group relative py-2 text-sm tracking-wide transition-all duration-300 ${
-                  isActive ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--fg)]'
+                  isActive ? 'text-white' : 'text-white hover:text-white/50'
                 }`}
               >
                 <span className="relative z-10 inline-block">
