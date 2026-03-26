@@ -117,7 +117,7 @@ export default function Navbar() {
               aria-label="Afficher le site en français"
               aria-pressed={lang === 'fr'}
             >
-              <img src={frFlag} alt="" className="w-5 h-5 object-contain" />
+              <img src={frFlag} alt="" className="w-7 h-3.5 object-fill" />
             </button>
             <button
               type="button"
@@ -130,7 +130,7 @@ export default function Navbar() {
               aria-label="Show site in English"
               aria-pressed={lang === 'en'}
             >
-              <img src={ukFlag} alt="" className="w-5 h-5 object-contain" />
+              <img src={ukFlag} alt="" className="w-7 h-3.5 object-fill" />
             </button>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function Navbar() {
             aria-label="Afficher le site en français"
             aria-pressed={lang === 'fr'}
           >
-            <img src={frFlag} alt="" className="w-5 h-5 object-contain" />
+            <img src={frFlag} alt="" className="w-7 h-3.5 object-fill" />
             <span>Français</span>
           </button>
           <button
@@ -194,7 +194,7 @@ export default function Navbar() {
             aria-label="Show site in English"
             aria-pressed={lang === 'en'}
           >
-            <img src={ukFlag} alt="" className="w-5 h-5 object-contain" />
+            <img src={ukFlag} alt="" className="w-7 h-3.5 object-fill" />
             <span>English</span>
           </button>
         </div>
