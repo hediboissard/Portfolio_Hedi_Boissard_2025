@@ -105,7 +105,7 @@ export default function Navbar() {
               </button>
             )
           })}
-          <div className="flex items-center gap-1 pl-6 ml-2 border-l border-[var(--fg)]/10">
+          <div className="flex items-center gap-3 pl-6 ml-2 border-l border-[var(--fg)]/10">
             <button
               type="button"
               onClick={() => setLang('fr')}
